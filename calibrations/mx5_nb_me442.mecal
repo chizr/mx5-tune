@@ -17314,7 +17314,7 @@
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
           <ToolTipText>The zone reported from the MAP sensor where the algorithm will operate.</ToolTipText>
-          <value>20</value>
+          <value>26</value>
           <Min>0</Min>
           <Max>0</Max>
           <CheckRange>false</CheckRange>
@@ -19878,7 +19878,7 @@
           <type>InputBox</type>
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
-          <value>0.1</value>
+          <value>1</value>
           <Min>0</Min>
           <Max>100</Max>
           <CheckRange>true</CheckRange>
@@ -25869,9 +25869,9 @@
         <float>41</float>
         <float>24</float>
         <float>17</float>
-        <float>17</float>
-        <float>21</float>
-        <float>23.5</float>
+        <float>15</float>
+        <float>19</float>
+        <float>22.5</float>
         <float>31.25</float>
         <float>37.5</float>
         <float>40.5</float>
@@ -25885,9 +25885,9 @@
         <float>41</float>
         <float>17</float>
         <float>18.75</float>
-        <float>18.75</float>
-        <float>22.25</float>
-        <float>26.75</float>
+        <float>16.75</float>
+        <float>20.25</float>
+        <float>25.75</float>
         <float>29.75</float>
         <float>33.25</float>
         <float>36.75</float>
@@ -25901,9 +25901,9 @@
         <float>38.75</float>
         <float>16</float>
         <float>17.75</float>
-        <float>17.75</float>
-        <float>20.5</float>
-        <float>24.25</float>
+        <float>15.75</float>
+        <float>18.5</float>
+        <float>23.25</float>
         <float>26.25</float>
         <float>28.75</float>
         <float>30.5</float>
@@ -25917,9 +25917,9 @@
         <float>34</float>
         <float>16</float>
         <float>17.75</float>
-        <float>16.75</float>
-        <float>19.5</float>
-        <float>21.5</float>
+        <float>14.75</float>
+        <float>17.5</float>
+        <float>20.5</float>
         <float>23.5</float>
         <float>26</float>
         <float>27.75</float>
