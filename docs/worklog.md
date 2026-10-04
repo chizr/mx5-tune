@@ -8,9 +8,9 @@ NB1 MX-5 10th Anniversary (6-speed, no VVT), RHD, ~200,000 km on the car. Built 
 
 | Part | Detail |
 | --- | --- |
-| Engine build | Honed and blueprinted ~500 km before 2026-10-04 (still running in). Stock pistons, new aftermarket forged rods, new bearings, stiffer valve springs, aftermarket damper, coolant reroute |
+| Engine build | Honed and blueprinted before Dec 2025; ~500 km since (still running in). Stock pistons, new aftermarket forged rods, new bearings, stiffer valve springs, aftermarket damper, coolant reroute |
 | ECU | Motorsport Electronics ME442-V2B-PNP, firmware 4.2.1, tuned in MEITE |
-| Turbo | TD04HL-19T hybrid (ME kit, pre-clocked), internal wastegate |
+| Turbo | TD04HL-19T hybrid (ME kit, pre-clocked), internal wastegate. Fitted in 2026, replacing a standard TD04 |
 | Wastegate actuator | Forge, green spring (believed to be the lightest) |
 | Intake and exhaust | Skunk2 intake; sports cat; full 2.5" exhaust |
 | Boost solenoid | Pierburg 3-port, 30 Hz, on LS1 |
@@ -70,7 +70,7 @@ Logs: `logs/2026-07-18_1644_sd_onboard-no3.csv` (259 s, light street driving, ma
 - **IAT** flat at 27–29 °C for the whole December log, no response to boost or idle. Suspect slow sensor.
 - **Idle valve:** 27.1% = 25.1% table + 2% fan adder gave ~1,214 rpm warm in July. December idle data is confounded by the fan adder and older mechanical settings; use July/new data only.
 - **Gear detection reads one gear low in 3rd and 4th** (Dec log, gear from km/h per 1,000 rpm vs `VSS Gear`). 1st and 2nd are correct. 3rd reads as 2 in 267 of 355 samples; 4th reads as 3 in 189 of 190. The six gearbox ratios match the 6-speed, so the error is likely the final drive, tyre size or VSS pulse setting. Effect: the 185 kPa 1st/2nd boost limit (v3) usually applies in 3rd too. That errs safe, but it must be fixed before gear-based boost work.
-- **Engine rebuild timing.** The engine was honed and blueprinted ~500 km before 2026-10-04. If the logs predate the rebuild, the knock baselines, oil pressure references and VE findings may not hold for the rebuilt engine (new bearings, rings, stiffer valve springs). Re-check them from new logs.
+- **Which hardware each log saw.** Both logs are after the engine rebuild, so oil pressure references, idle and light-load findings hold for this engine. The December log was on the **old standard TD04**: its boost-side findings (cyl 2/3 knock pattern at 90–140 kPa, max 133 kPa) came from a different turbo with different spool, exhaust back-pressure and charge temperatures. Off-boost knock noise floors (used for v5 thresholds) are engine noise and should carry over. The v5 timing pull stays as a precaution, but the knock picture on the hybrid needs new per-cylinder logs.
 - **Boost control** has no base duty (OL and CL initial duty tables all zero). In July, duty sat at a flat 65% as MAP crossed 105 kPa, which looks like a fixed spool value rather than PID output.
 
 ## Open items
@@ -87,7 +87,8 @@ Next: burn v7, then work through `docs/run-sheet_v7.pdf` and commit the logs.
 - [ ] Road: knock baseline and reproduction runs
 - [ ] Road: solenoid unplugged test (spring pressure only)
 - [ ] Road: open loop boost duty steps in 3rd, over-boost cut ~20 kPa above expected
-- [ ] Confirm whether the Dec 2025 and Jul 2026 logs were before or after the rebuild
+- [x] Logs vs rebuild: both after (Chris, 2026-10-04)
+- [ ] Was the Jul 2026 log on the new hybrid turbo? (swap date; and was the Forge actuator fitted with it?)
 - [ ] Fix gear detection: record tyre size and confirm the final drive, then check `VSS Calc. Speed` against GPS speed and correct the VSS/final drive settings
 - [ ] Fill boost CL initial duty table from duty-step logs; enable "use initial duty table"; revisit PID
 - [ ] Correct light-load VE from the new overrun log (or long term trim, then bake in)

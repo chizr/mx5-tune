@@ -20,7 +20,7 @@ Chris's NB1 MX-5 10th Anniversary (6-speed; built 1.8 BP, **stock pistons**, for
 
 ## Safety stance
 
-- Stock pistons: failures are ring lands from detonation. Low-rpm, high-load knock is the main risk; cylinders 2 and 3 already show a knock-like pattern on boost.
+- Stock pistons: failures are ring lands from detonation. Low-rpm, high-load knock is the main risk; cylinders 2 and 3 showed a knock-like pattern on boost (Dec 2025 log, on the old standard TD04; not yet checked on the hybrid).
 - Don't raise boost targets or add timing without log evidence. Prefer removing timing over adding it. Keep over-boost cut, lean, oil and knock protection enabled.
 - Treat numbers from forums or guesses as approximate and label them. Recommend dyno with det cans for final timing.
 - Road testing: full-throttle pulls belong on a closed road, track or dyno.
