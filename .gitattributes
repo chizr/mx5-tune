@@ -1,0 +1,8 @@
+# MEITE calibrations: keep bytes exactly as MEITE wrote them (CRLF, UTF-8).
+# Readable diffs come from tools/mecal.py via the "mecal" diff driver (run tools/setup-git.sh once).
+*.mecal -text diff=mecal
+
+# ECU logs: store byte-for-byte.
+*.csv -text
+
+*.pdf binary
