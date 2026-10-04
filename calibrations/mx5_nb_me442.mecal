@@ -24280,7 +24280,7 @@
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
           <ToolTipText>Enable switch for EPS oil pressure and warnings.</ToolTipText>
-          <value>0</value>
+          <value>1</value>
           <Min>0</Min>
           <Max>0</Max>
           <CheckRange>false</CheckRange>
@@ -24314,7 +24314,7 @@
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
           <ToolTipText>Trigger time (in miliseconds) for the oil pressure to drop below limit.</ToolTipText>
-          <value>50</value>
+          <value>300</value>
           <Min>0</Min>
           <Max>1000</Max>
           <CheckRange>true</CheckRange>
@@ -24326,7 +24326,7 @@
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
           <ToolTipText>RPM limit for when oil pressure drops below threshold. 0 for engine off</ToolTipText>
-          <value>0</value>
+          <value>2000</value>
           <Min>0</Min>
           <Max>20000</Max>
           <CheckRange>true</CheckRange>
@@ -35920,22 +35920,22 @@
         <float>0</float>
       </input_1>
       <output>
-        <float>400</float>
-        <float>400</float>
-        <float>400</float>
-        <float>400</float>
-        <float>400</float>
-        <float>400</float>
-        <float>400</float>
-        <float>400</float>
-        <float>400</float>
-        <float>400</float>
-        <float>400</float>
-        <float>400</float>
-        <float>400</float>
-        <float>400</float>
-        <float>400</float>
-        <float>400</float>
+        <float>130</float>
+        <float>150</float>
+        <float>180</float>
+        <float>200</float>
+        <float>220</float>
+        <float>230</float>
+        <float>240</float>
+        <float>240</float>
+        <float>240</float>
+        <float>240</float>
+        <float>240</float>
+        <float>240</float>
+        <float>240</float>
+        <float>240</float>
+        <float>240</float>
+        <float>240</float>
       </output>
       <incVal>0.1</incVal>
       <defaultValue>0</defaultValue>
