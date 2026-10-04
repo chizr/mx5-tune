@@ -19447,7 +19447,7 @@
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
           <ToolTipText>Enable/Disable knock control.</ToolTipText>
-          <value>0</value>
+          <value>1</value>
           <Min>0</Min>
           <Max>0</Max>
           <CheckRange>false</CheckRange>
@@ -19469,7 +19469,7 @@
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
           <ToolTipText>Minimum RPM for the knock control to be active.</ToolTipText>
-          <value>700</value>
+          <value>1200</value>
           <Min>0</Min>
           <Max>20000</Max>
           <CheckRange>true</CheckRange>
@@ -19493,7 +19493,7 @@
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
           <ToolTipText>Maximum retard when knock is detected.</ToolTipText>
-          <value>10</value>
+          <value>8</value>
           <Min>0</Min>
           <Max>60</Max>
           <CheckRange>true</CheckRange>
@@ -19529,7 +19529,7 @@
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
           <ToolTipText>Number of rotations between two consecutive ignition advance events.</ToolTipText>
-          <value>1</value>
+          <value>10</value>
           <Min>0</Min>
           <Max>1000</Max>
           <CheckRange>true</CheckRange>
@@ -25919,11 +25919,11 @@
         <float>17.75</float>
         <float>14.75</float>
         <float>17.5</float>
-        <float>20.5</float>
-        <float>23.5</float>
-        <float>26</float>
-        <float>27.75</float>
-        <float>29.5</float>
+        <float>19.5</float>
+        <float>22.5</float>
+        <float>25</float>
+        <float>26.75</float>
+        <float>29</float>
         <float>30.75</float>
         <float>31.25</float>
         <float>31.75</float>
@@ -25935,11 +25935,11 @@
         <float>15.5</float>
         <float>10.75</float>
         <float>11.5</float>
-        <float>17</float>
-        <float>19.75</float>
-        <float>23</float>
-        <float>25.25</float>
-        <float>26.5</float>
+        <float>15</float>
+        <float>17.75</float>
+        <float>21</float>
+        <float>23.25</float>
+        <float>25.5</float>
         <float>27.5</float>
         <float>28</float>
         <float>28.75</float>
@@ -25951,11 +25951,11 @@
         <float>7.25</float>
         <float>7.5</float>
         <float>9.25</float>
-        <float>13</float>
-        <float>17.75</float>
-        <float>21</float>
+        <float>11</float>
+        <float>15.75</float>
+        <float>19</float>
+        <float>20.5</float>
         <float>22.5</float>
-        <float>23.5</float>
         <float>24.5</float>
         <float>24.75</float>
         <float>26.25</float>
@@ -25967,11 +25967,11 @@
         <float>4.75</float>
         <float>5.25</float>
         <float>6.5</float>
-        <float>10</float>
-        <float>16.25</float>
-        <float>19.5</float>
-        <float>21</float>
-        <float>21.75</float>
+        <float>8</float>
+        <float>14.25</float>
+        <float>17.5</float>
+        <float>19</float>
+        <float>20.75</float>
         <float>22.75</float>
         <float>23.5</float>
         <float>24.25</float>
@@ -25983,11 +25983,11 @@
         <float>3.75</float>
         <float>4.25</float>
         <float>4.5</float>
-        <float>7.5</float>
-        <float>15.25</float>
-        <float>18</float>
-        <float>19</float>
-        <float>20.25</float>
+        <float>5.5</float>
+        <float>13.25</float>
+        <float>16</float>
+        <float>17</float>
+        <float>19.25</float>
         <float>21.2499981</float>
         <float>22</float>
         <float>23</float>
@@ -25999,11 +25999,11 @@
         <float>3.25</float>
         <float>3.75</float>
         <float>3.5</float>
-        <float>6.5</float>
-        <float>13.75</float>
-        <float>15.5</float>
-        <float>16.5</float>
-        <float>17.75</float>
+        <float>4.5</float>
+        <float>11.75</float>
+        <float>13.5</float>
+        <float>14.5</float>
+        <float>16.75</float>
         <float>19.25</float>
         <float>20.25</float>
         <float>21.25</float>
@@ -26015,11 +26015,11 @@
         <float>2.25</float>
         <float>2.75</float>
         <float>2.5</float>
-        <float>5</float>
-        <float>11.75</float>
-        <float>14.5</float>
-        <float>15.5</float>
-        <float>16.75</float>
+        <float>3</float>
+        <float>9.75</float>
+        <float>12.5</float>
+        <float>13.5</float>
+        <float>15.75</float>
         <float>18.25</float>
         <float>19</float>
         <float>20.25</float>
@@ -26031,11 +26031,11 @@
         <float>3.75</float>
         <float>3.75</float>
         <float>2.5</float>
-        <float>5</float>
-        <float>10.75</float>
-        <float>13.5</float>
-        <float>14.5</float>
-        <float>15.75</float>
+        <float>3</float>
+        <float>8.75</float>
+        <float>11.5</float>
+        <float>12.5</float>
+        <float>14.75</float>
         <float>17.25</float>
         <float>18</float>
         <float>19.25</float>
@@ -26047,11 +26047,11 @@
         <float>3.75</float>
         <float>3.75</float>
         <float>2.5</float>
-        <float>4</float>
-        <float>9.75</float>
-        <float>12.5</float>
-        <float>13.5</float>
-        <float>14.75</float>
+        <float>2</float>
+        <float>7.75</float>
+        <float>10.5</float>
+        <float>11.5</float>
+        <float>13.75</float>
         <float>16.25</float>
         <float>17</float>
         <float>18.25</float>
@@ -26063,11 +26063,11 @@
         <float>1.25</float>
         <float>1.25</float>
         <float>0</float>
-        <float>1.5</float>
-        <float>6.75</float>
-        <float>9.5</float>
-        <float>10.5</float>
-        <float>11.75</float>
+        <float>0</float>
+        <float>4.75</float>
+        <float>7.5</float>
+        <float>8.5</float>
+        <float>10.75</float>
         <float>13.25</float>
         <float>14</float>
         <float>15.25</float>
@@ -30861,22 +30861,22 @@
         <float>0</float>
       </input_1>
       <output>
-        <float>270</float>
-        <float>270</float>
-        <float>270</float>
-        <float>270</float>
-        <float>270</float>
-        <float>280</float>
-        <float>300</float>
-        <float>340</float>
         <float>400</float>
-        <float>470</float>
+        <float>400</float>
+        <float>380</float>
+        <float>370</float>
+        <float>380</float>
+        <float>420</float>
+        <float>480</float>
         <float>520</float>
-        <float>560</float>
         <float>580</float>
-        <float>580</float>
-        <float>580</float>
-        <float>580</float>
+        <float>620</float>
+        <float>660</float>
+        <float>700</float>
+        <float>720</float>
+        <float>740</float>
+        <float>740</float>
+        <float>740</float>
       </output>
       <incVal>0.1</incVal>
       <defaultValue>0</defaultValue>
