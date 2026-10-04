@@ -10,7 +10,7 @@ ME442 calibration, logs and worklog for an NB1 MX-5 with a TD04HL-19T on a built
 ## Setup
 
 ```sh
-pip install -r requirements.txt
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt   # then use .venv/bin/python for tools
 sh tools/setup-git.sh          # readable diffs for .mecal files
 ```
 

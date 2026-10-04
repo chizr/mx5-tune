@@ -5,10 +5,18 @@ from reportlab.lib import colors
 from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-pdfmetrics.registerFont(TTFont('DejaVu','/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'))
+import os
 
-doc=SimpleDocTemplate('docs/run-sheet_v7.pdf',pagesize=A4,leftMargin=16*mm,rightMargin=16*mm,topMargin=14*mm,bottomMargin=14*mm,
-    title='MX-5 NB turbo run sheet (cal v7)',author='Chris')
+VERSION='v7'  # calibration tag this run sheet is for; output goes to docs/run-sheet_<VERSION>.pdf
+
+# Any TTF with the ☐ glyph (U+2610) will do: DejaVu on Linux, Arial Unicode on macOS.
+FONTS=['/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',
+       '/System/Library/Fonts/Supplemental/Arial Unicode.ttf',
+       '/Library/Fonts/Arial Unicode.ttf']
+pdfmetrics.registerFont(TTFont('DejaVu',next(f for f in FONTS if os.path.exists(f))))
+
+doc=SimpleDocTemplate(f'docs/run-sheet_{VERSION}.pdf',pagesize=A4,leftMargin=16*mm,rightMargin=16*mm,topMargin=14*mm,bottomMargin=14*mm,
+    title=f'MX-5 NB turbo run sheet (cal {VERSION})',author='Chris')
 ss=getSampleStyleSheet()
 H1=ParagraphStyle('h1',parent=ss['Title'],fontSize=17,spaceAfter=2,alignment=0)
 H2=ParagraphStyle('h2',parent=ss['Heading2'],fontSize=12.5,spaceBefore=8,spaceAfter=3,textColor=colors.HexColor('#1f3b57'))
@@ -30,7 +38,7 @@ def grid(header,rows,widths):
     return t
 st=[]
 st.append(Paragraph('MX-5 NB turbo run sheet',H1))
-st.append(Paragraph('Calibration: <b>18Jul_boost_pwm_limits_v7.mecal</b> &nbsp;&nbsp; Date: ____________ &nbsp;&nbsp; Ambient: ______ °C &nbsp;&nbsp; Fuel: 98 RON',B))
+st.append(Paragraph(f'Calibration: <b>mx5_nb_me442.mecal</b> at tag <b>{VERSION}</b> &nbsp;&nbsp; Date: ____________ &nbsp;&nbsp; Ambient: ______ °C &nbsp;&nbsp; Fuel: 98 RON',B))
 st.append(Paragraph('Do Part A in the driveway first. Part B needs the car moving; keep the boost pulls (B4, B5) for a closed road, track day or the dyno. Start a fresh log for each test and note the log number in the box.',S))
 
 st.append(Paragraph('Before you start',H2))
