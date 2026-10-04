@@ -12,7 +12,7 @@ NB1 MX-5 10th Anniversary (6-speed, no VVT), RHD, ~200,000 km on the car. Built 
 | ECU | Motorsport Electronics ME442-V2B-PNP, firmware 4.2.1, tuned in MEITE |
 | Turbo | TD04HL-19T hybrid (ME kit, pre-clocked), internal wastegate |
 | Wastegate actuator | Forge, green spring (believed to be the lightest) |
-| Intake and exhaust | Sjunk2 intake; sports cat; full 2.5" exhaust |
+| Intake and exhaust | Skunk2 intake; sports cat; full 2.5" exhaust |
 | Boost solenoid | Pierburg 3-port, 30 Hz, on LS1 |
 | Injectors | Bosch EV14 640 cc/min (ME INJ-650 kit), exact Bosch part number unknown |
 | Fuel system | Aftermarket rising-rate regulator, 300 kPa above manifold (confirmed in logs); pump believed to be DW200 |
