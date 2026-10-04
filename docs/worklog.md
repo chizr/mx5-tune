@@ -10,8 +10,8 @@ NB1 MX-5 10th Anniversary (6-speed, no VVT), RHD, ~200,000 km on the car. Built 
 | --- | --- |
 | Engine build | Honed and blueprinted before Dec 2025; ~500 km since (still running in). Stock pistons, new aftermarket forged rods, new bearings, stiffer valve springs, aftermarket damper, coolant reroute |
 | ECU | Motorsport Electronics ME442-V2B-PNP, firmware 4.2.1, tuned in MEITE |
-| Turbo | TD04HL-19T hybrid (ME kit, pre-clocked), internal wastegate. Fitted in 2026, replacing a standard TD04 |
-| Wastegate actuator | Forge, green spring (believed to be the lightest) |
+| Turbo | TD04HL-19T hybrid (ME kit, pre-clocked), internal wastegate. Fitted in 2026 (before Jul), replacing a standard TD04 |
+| Wastegate actuator | Forge, green spring (believed to be the lightest). Fitted with the hybrid |
 | Intake and exhaust | Skunk2 intake; sports cat; full 2.5" exhaust |
 | Boost solenoid | Pierburg 3-port, 30 Hz, on LS1 |
 | Injectors | Bosch EV14 640 cc/min (ME INJ-650 kit), exact Bosch part number unknown |
@@ -88,7 +88,7 @@ Next: burn v7, then work through `docs/run-sheet_v7.pdf` and commit the logs.
 - [ ] Road: solenoid unplugged test (spring pressure only)
 - [ ] Road: open loop boost duty steps in 3rd, over-boost cut ~20 kPa above expected
 - [x] Logs vs rebuild: both after (Chris, 2026-10-04)
-- [ ] Was the Jul 2026 log on the new hybrid turbo? (swap date; and was the Forge actuator fitted with it?)
+- [x] Jul 2026 log was on the hybrid with the Forge actuator (Chris, 2026-10-04)
 - [ ] Fix gear detection: record tyre size and confirm the final drive, then check `VSS Calc. Speed` against GPS speed and correct the VSS/final drive settings
 - [ ] Fill boost CL initial duty table from duty-step logs; enable "use initial duty table"; revisit PID
 - [ ] Correct light-load VE from the new overrun log (or long term trim, then bake in)
