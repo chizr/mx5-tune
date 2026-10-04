@@ -17336,7 +17336,7 @@
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
           <ToolTipText>The zone reported from the MAP sensor where the algorithm will operate.</ToolTipText>
-          <value>250</value>
+          <value>105</value>
           <Min>0</Min>
           <Max>0</Max>
           <CheckRange>false</CheckRange>
@@ -17912,7 +17912,7 @@
           <type>InputBox</type>
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
-          <value>210</value>
+          <value>225</value>
           <Min>0</Min>
           <Max>1000</Max>
           <CheckRange>true</CheckRange>
@@ -19835,7 +19835,7 @@
           <type>ComboBox</type>
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
-          <value>0</value>
+          <value>1</value>
           <Min>0</Min>
           <Max>0</Max>
           <CheckRange>false</CheckRange>
@@ -19856,7 +19856,7 @@
           <type>InputBox</type>
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
-          <value>1500</value>
+          <value>1800</value>
           <Min>0</Min>
           <Max>20000</Max>
           <CheckRange>true</CheckRange>
@@ -19925,7 +19925,7 @@
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
           <ToolTipText>Progressive fuel return duration. Set to '0' to disable.</ToolTipText>
-          <value>0</value>
+          <value>0.4</value>
           <Min>0</Min>
           <Max>1000</Max>
           <CheckRange>true</CheckRange>
@@ -19937,7 +19937,7 @@
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
           <ToolTipText>How much fuel to add after exiting overrun.</ToolTipText>
-          <value>30</value>
+          <value>20</value>
           <Min>0</Min>
           <Max>200</Max>
           <CheckRange>true</CheckRange>
@@ -24063,7 +24063,7 @@
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
           <ToolTipText>Overall switch for engine protection strategies and warnings.</ToolTipText>
-          <value>0</value>
+          <value>1</value>
           <Min>0</Min>
           <Max>0</Max>
           <CheckRange>false</CheckRange>
@@ -24603,7 +24603,7 @@
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
           <ToolTipText>Enable switch for EPS lambda.</ToolTipText>
-          <value>0</value>
+          <value>1</value>
           <Min>0</Min>
           <Max>0</Max>
           <CheckRange>false</CheckRange>
@@ -24649,7 +24649,7 @@
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
           <ToolTipText>Minimum MAP.</ToolTipText>
-          <value>35</value>
+          <value>130</value>
           <Min>0</Min>
           <Max>1000</Max>
           <CheckRange>true</CheckRange>
@@ -24664,7 +24664,7 @@
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
           <ToolTipText>Minimum TPS.</ToolTipText>
-          <value>20</value>
+          <value>50</value>
           <Min>0</Min>
           <Max>100</Max>
           <CheckRange>true</CheckRange>
@@ -24676,7 +24676,7 @@
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
           <ToolTipText>Minimum RPM.</ToolTipText>
-          <value>2000</value>
+          <value>2500</value>
           <Min>0</Min>
           <Max>20000</Max>
           <CheckRange>true</CheckRange>
@@ -24688,7 +24688,7 @@
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
           <ToolTipText>Maximum AFR error.</ToolTipText>
-          <value>0.5</value>
+          <value>0.8</value>
           <Min>0</Min>
           <Max>20</Max>
           <CheckRange>true</CheckRange>
@@ -24700,7 +24700,7 @@
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
           <ToolTipText>Trigger time (in miliseconds) for AFR to get outside tolerance until a fault is triggered.</ToolTipText>
-          <value>100</value>
+          <value>300</value>
           <Min>0</Min>
           <Max>1000</Max>
           <CheckRange>true</CheckRange>
@@ -24712,7 +24712,7 @@
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
           <ToolTipText>RPM limit for when a fault is triggered. 0 for engine cutoff</ToolTipText>
-          <value>0</value>
+          <value>3000</value>
           <Min>0</Min>
           <Max>20000</Max>
           <CheckRange>true</CheckRange>
@@ -26498,16 +26498,16 @@
         <float>0</float>
         <float>0</float>
         <float>0</float>
-        <float>0</float>
-        <float>0</float>
-        <float>0</float>
-        <float>0</float>
-        <float>0</float>
-        <float>0</float>
-        <float>0</float>
-        <float>0</float>
-        <float>0</float>
-        <float>0</float>
+        <float>-1</float>
+        <float>-2</float>
+        <float>-3</float>
+        <float>-3.5</float>
+        <float>-4</float>
+        <float>-4</float>
+        <float>-4</float>
+        <float>-4</float>
+        <float>-4</float>
+        <float>-4</float>
       </output>
       <incVal>0.1</incVal>
       <defaultValue>0</defaultValue>
@@ -31925,8 +31925,8 @@
       </input_1>
       <output>
         <float>300</float>
-        <float>300</float>
-        <float>300</float>
+        <float>185</float>
+        <float>185</float>
         <float>300</float>
         <float>300</float>
         <float>300</float>
