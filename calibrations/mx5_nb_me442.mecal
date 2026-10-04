@@ -30632,15 +30632,15 @@
         <float>31.6999989</float>
         <float>30.8</float>
         <float>28.4</float>
-        <float>25.5</float>
-        <float>25.1</float>
-        <float>24.1</float>
-        <float>25.1</float>
-        <float>25.1</float>
-        <float>25.1</float>
-        <float>25.1</float>
-        <float>25.1</float>
-        <float>25.1</float>
+        <float>24.5</float>
+        <float>23.5</float>
+        <float>23</float>
+        <float>22.5</float>
+        <float>22.5</float>
+        <float>22.5</float>
+        <float>22.5</float>
+        <float>22.5</float>
+        <float>22.5</float>
       </output>
       <incVal>0.1</incVal>
       <defaultValue>0</defaultValue>
