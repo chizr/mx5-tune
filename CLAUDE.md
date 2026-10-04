@@ -34,6 +34,17 @@ Chris's NB1 MX-5 (built 1.8 BP, **stock pistons**, forged rods, TD04HL-19T, ME44
 - Fuel pressure channel is gauge pressure: fuel − (MAP − 100) should be ~300 kPa.
 - Ignore VVT channels (NB1 has no VVT) and EGT (no sensor fitted).
 
+## Public repo: no PII or secrets
+
+This repo is public (github.com/chizr/mx5-tune). Everything committed, including history, is readable by anyone and can't be fully withdrawn.
+
+- Never commit: passwords, API keys, tokens or other credentials; addresses, phone numbers, or email addresses other than the commit author; VIN, registration plate, or ECU/part serial numbers; names of other people; or work (EstimateOne) details.
+- Logs: before adding one, check its header for GPS / latitude / longitude / position channels and drop those columns (or don't commit the log). Note anything removed in `logs/README.md`. Describe where a drive happened generally ("closed road", "street"), never by location.
+- Calibrations: check `<CalibrationNotes>` is empty or free of personal details.
+- Photos, dyno sheets, receipts and invoices often show plates, names or addresses. Don't commit them unless they're cropped or redacted.
+- Commits use `me@christopherdyer.net` (set in this repo's local git config). Never commit with a work email.
+- If something sensitive does get committed, stop and tell Chris before pushing. If it's already pushed, rotate any secret first; deleting the file in a new commit doesn't remove it from history.
+
 ## Working style
 
 Chris wants to understand cause and effect, not just get numbers. Explain why a change should help and what log signature would confirm it. Keep changes small and testable before the dyno.
