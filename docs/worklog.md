@@ -11,7 +11,7 @@ NB1 MX-5 10th Anniversary (6-speed, no VVT), RHD, ~200,000 km on the car. Built 
 | Engine build | Honed and blueprinted before Dec 2025; ~500 km since (still running in). Stock pistons, new aftermarket forged rods, new bearings, stiffer valve springs, aftermarket damper, coolant reroute |
 | ECU | Motorsport Electronics ME442-V2B-PNP, firmware 4.2.1, tuned in MEITE |
 | Turbo | TD04HL-19T hybrid (ME kit, pre-clocked), internal wastegate. Fitted in 2026 (before Jul), replacing a standard TD04 |
-| Wastegate actuator | Forge, green spring (believed to be the lightest). Fitted with the hybrid |
+| Wastegate actuator | Forge, single port, green spring (lightest in Forge's kit). Forge rating (T2 049): starts opening ~5 psi / 0.35 bar (~135 kPa abs), running ~10 psi / 0.7 bar (~170 kPa abs); the 048 (big) green is 0.7 bar. Fitted with the hybrid. A stronger Forge spring is on hand |
 | Intake and exhaust | Skunk2 intake; sports cat; full 2.5" exhaust |
 | Boost solenoid | Pierburg 3-port, 30 Hz, on LS1 |
 | Injectors | Bosch EV14 640 cc/min (ME INJ-650 kit), exact Bosch part number unknown |
@@ -103,7 +103,7 @@ Logs: `logs/2026-07-18_1644_sd_onboard-no3.csv` (259 s, light street driving, ma
 Next: burn v8. Drive the old fuel down gently (off boost), logging every drive for VE, then fill with fresh 98 before knock and boost runs (B3–B5).
 
 - [ ] **Re-plumb boost solenoid.** Unpowered: actuator ↔ vent, supply blocked (confirmed). Check 12 V pairing; if supply ↔ actuator, swap the supply and vent hoses. Re-test: unpowered supply → actuator; 12 V actuator → vent. Required before any boost running or B4
-- [ ] After re-plumbing, boost duty will hold the gate shut for the first time on this turbo (PID untuned, no initial duty table, 65% step at 105 kPa). Temporarily lower over-boost cut (~170 kPa) for B4/B5
+- [ ] After re-plumbing, boost duty will hold the gate shut for the first time on this turbo (PID untuned, no initial duty table, 65% step at 105 kPa). Temporarily set over-boost cut ~190 kPa for B4/B5 (20 kPa above the green spring's ~170 kPa running pressure)
 - [x] Burn v7 (2026-10-07)
 - [x] Idle valve duty sweep (2026-10-07): ~21.5% for 1,000 rpm warm, fan off
 - [x] Power steering idle-up works; confirmed in log 2026-10-07
@@ -112,7 +112,7 @@ Next: burn v8. Drive the old fuel down gently (off boost), logging every drive f
 - [x] Idle spark scatter set and working (2026-10-07)
 - [x] Overrun / return-to-idle log with v7 (2026-10-07): still dips, see findings
 - [ ] Knock: v8 pulls 2° at 2,000–3,000 rpm × 83–97 kPa. Re-log on fresh fuel: expect fewer or no retard events, and cyl 3 ratio on boost nearer 1.1–1.2×
-- [ ] Boost: hybrid tops out at 115–117 kPa in both logs (Jul, Oct), only 2–4 s above 105 kPa; old TD04 (Dec) made 123–132 kPa at 2,500–3,500 rpm on similar part throttle, at 90% duty. Part is the bigger compressor and short bursts, but a ceiling suggests: light green spring cracking early, the 80% `PWM Max Duty` cap (was 90% in Dec), or solenoid plumbed backwards. B4 (0% duty, 3rd, full throttle) gives the spring-only ceiling; B5 duty steps show which way duty moves boost. Look up the green spring's rated pressure
+- [ ] Boost: hybrid tops out at 115–117 kPa in both logs (Jul, Oct), only 2–4 s above 105 kPa; old TD04 (Dec) made 123–132 kPa at 2,500–3,500 rpm on similar part throttle, at 90% duty. Part is the bigger compressor and short bursts, but a ceiling suggests: light green spring cracking early, the 80% `PWM Max Duty` cap (was 90% in Dec), or solenoid plumbed backwards. B4 (0% duty, 3rd, full throttle) gives the spring-only ceiling; B5 duty steps show which way duty moves boost. Green spring rating (Forge): opens ~135 kPa abs, runs ~170 kPa abs, so it can't explain a 115–117 kPa ceiling even with the backwards plumbing. More likely the low boost is mostly short part-throttle bursts plus the bigger compressor. Keep the green spring: its spring-only boost already sits inside the 150–190 kPa targets, and a stronger one would raise the floor and the failure-mode boost above what stock pistons should see
 - [ ] Return-to-idle dip: lean spike (17–24 AFR) as fuel returns after a blip, then CL overshoot. Look at overrun re-entry fuel and closed-throttle fuelling (separate change)
 - [ ] Knock control: consider gentler retard (smaller step or rotations per step) once timing is safer
 - [ ] Road: solenoid unplugged test (spring pressure only)
