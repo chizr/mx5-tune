@@ -98,11 +98,12 @@ Logs: `logs/2026-07-18_1644_sd_onboard-no3.csv` (259 s, light street driving, ma
 
 ## Open items
 
-**Safety, 2026-10-07: boost solenoid appears plumbed backwards.** Bench test: with the solenoid unpowered, the boost supply port is blocked, so the actuator sees no pressure at 0% duty (below 105 kPa, or if the solenoid loses power) and the wastegate stays shut until the 225 kPa over-boost cut. Above 105 kPa the 65–80% duty then feeds boost *to* the actuator, which fits the 115–117 kPa ceiling. Stay off boost and do not run B4 until it is re-plumbed so unpowered = supply connected to actuator. Don't fix it with `PWM Solenoid Control` = Inverted: that keeps the unsafe failure mode.
+**Safety, 2026-10-07: boost solenoid plumbed backwards (confirmed).** Bench test: with the solenoid unpowered, the boost supply port is blocked and the actuator port connects to the vent, so the actuator sees no pressure at 0% duty (below 105 kPa, or if the solenoid loses power) and the wastegate stays shut until the 225 kPa over-boost cut. Above 105 kPa the 65–80% duty then feeds boost *to* the actuator, which fits the 115–117 kPa ceiling. Stay off boost and do not run B4 until it is re-plumbed so unpowered = supply connected to actuator. Don't fix it with `PWM Solenoid Control` = Inverted: that keeps the unsafe failure mode.
 
 Next: burn v8. Drive the old fuel down gently (off boost), logging every drive for VE, then fill with fresh 98 before knock and boost runs (B3–B5).
 
-- [ ] **Re-plumb boost solenoid** (full port test unpowered/12 V, then swap hoses so unpowered = supply → actuator). Required before any boost running or B4
+- [ ] **Re-plumb boost solenoid.** Unpowered: actuator ↔ vent, supply blocked (confirmed). Check 12 V pairing; if supply ↔ actuator, swap the supply and vent hoses. Re-test: unpowered supply → actuator; 12 V actuator → vent. Required before any boost running or B4
+- [ ] After re-plumbing, boost duty will hold the gate shut for the first time on this turbo (PID untuned, no initial duty table, 65% step at 105 kPa). Temporarily lower over-boost cut (~170 kPa) for B4/B5
 - [x] Burn v7 (2026-10-07)
 - [x] Idle valve duty sweep (2026-10-07): ~21.5% for 1,000 rpm warm, fan off
 - [x] Power steering idle-up works; confirmed in log 2026-10-07
