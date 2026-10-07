@@ -7,7 +7,7 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 import os
 
-VERSION='v9'  # calibration tag this run sheet is for; output goes to docs/run-sheet_<VERSION>.pdf
+VERSION='v10'  # calibration tag this run sheet is for; output goes to docs/run-sheet_<VERSION>.pdf
 
 # Any TTF with the ☐ glyph (U+2610) will do: DejaVu on Linux, Arial Unicode on macOS.
 FONTS=['/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',
@@ -39,12 +39,12 @@ def grid(header,rows,widths):
 st=[]
 st.append(Paragraph('MX-5 NB turbo run sheet',H1))
 st.append(Paragraph(f'Calibration: <b>mx5_nb_me442.mecal</b> at tag <b>{VERSION}</b> &nbsp;&nbsp; Date: ____________ &nbsp;&nbsp; Ambient: ______ °C &nbsp;&nbsp; Fuel: 98 RON, bought ____________',B))
-st.append(Paragraph('Part A in the garage, before burning v9. Part B is everyday driving on the old fuel, <b>off boost</b> (MAP under ~100 kPa), until the tank is low. Part C only on <b>fresh 98</b> and only on a closed road, track day or dyno. Log every drive (all channels, 10 Hz, as on 7 Oct) and note the log number in the box.',S))
+st.append(Paragraph(f'Part A in the garage, before burning {VERSION}. Part B is everyday driving on the old fuel, <b>off boost</b> (MAP under ~100 kPa), until the tank is low. Part C only on <b>fresh 98</b> and only on a closed road, track day or dyno. Log every drive (all channels, 10 Hz, as on 7 Oct) and note the log number in the box.',S))
 
 st.append(Paragraph('Before you start',H2))
 st+= step('',[
  'Save a copy of the calibration currently in the car (v7, for rollback).',
- 'Open v9 in MEITE and spot-check: Ign. Adv. (Pri 1) 83 kPa row at 2000 / 2500 / 3000 / 3500 rpm = 21.25 / 24.25 / 26.75 / 29.5; 97 kPa row = 17.5 / 20.5 / 23.0 / 25.75. Idle OL Duty 80 °C and up = 21.5. Boost Settings: Abs. Max Boost = 190, PWM Solenoid Control = <b>Normal</b>.',
+ f'Open {VERSION} in MEITE and spot-check: Ign. Adv. (Pri 1) 83 kPa row at 2000 / 2500 / 3000 / 3500 rpm = 21.25 / 24.25 / 26.75 / 29.5; 97 kPa row = 17.5 / 20.5 / 23.0 / 25.75. Idle OL Duty 80 °C and up = 21.5. Boost Settings: Abs. Max Boost = 190, PWM Min / Max Duty = 0 / 80, PWM Solenoid Control = <b>Normal</b>.',
 ])
 
 st.append(Paragraph('Part A: garage',H2))
@@ -61,8 +61,8 @@ st+= step('A2. Boost leak test',[
  'Listen, and spray soapy water on: compressor outlet, intercooler and its couplers, throttle body, BOV, vacuum lines, PCV, solenoid hoses.',
  'Leaks found and fixed: ______________________________'],
  note='A slow leak-down through the engine itself (open valves) is normal. Hissing at a joint is not.')
-st+= step('A3. Burn v9, then warm idle check',[
- 'Burn v9. Warm fully (coolant 85 °C+).',
+st+= step(f'A3. Burn {VERSION}, then warm idle check',[
+ f'Burn {VERSION}. Warm fully (coolant 85 °C+).',
  'Fan off, wheel straight: idle ______ rpm (expect ~1,000). Fan on: ______ rpm (expect ~1,050–1,100).'],
  note='Log no: ______')
 
