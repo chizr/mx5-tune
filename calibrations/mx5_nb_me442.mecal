@@ -17912,7 +17912,7 @@
           <type>InputBox</type>
           <readOnly>false</readOnly>
           <RequiresReset>false</RequiresReset>
-          <value>225</value>
+          <value>190</value>
           <Min>0</Min>
           <Max>1000</Max>
           <CheckRange>true</CheckRange>
