@@ -1,6 +1,6 @@
 # MX-5 NB turbo tune — worklog
 
-Last updated 2026-10-07. Calibration in the repo: `calibrations/mx5_nb_me442.mecal` at tag `v9`, **not yet burned or driven** (v8 also not yet burned). v7 was burned and driven 2026-10-07 (Part A of the run sheet plus a 20 min drive; filled-in page 1: `docs/run_sheet_v7.jpg`).
+Last updated 2026-10-07. Calibration in the repo: `calibrations/mx5_nb_me442.mecal` at tag `v10`, **not yet burned or driven** (v8 and v9 also not yet burned; v10 includes both). v7 was burned and driven 2026-10-07 (Part A of the run sheet plus a 20 min drive; filled-in page 1: `docs/run_sheet_v7.jpg`).
 
 ## Car and hardware
 
@@ -32,6 +32,7 @@ Versions are git tags on `calibrations/mx5_nb_me442.mecal`. `v1` is the original
 
 | Tag | Area | Setting | Before | After | Why |
 | --- | --- | --- | --- | --- | --- |
+| v10 | Boost | PWM Min Duty | 10% | 0% | Solenoid re-plumbed: less duty now means less boost, so a lower floor is safe, and C2 (0% duty) becomes a true spring-only test instead of possibly clamping to 10%. PWM Max Duty stays 80% until C3 duty steps show what duty gives the 190 kPa peak target |
 | v9 | Boost | Abs. Max Boost (over-boost cut) | 225 kPa | 190 kPa (temporary) | First boost runs after re-plumbing the solenoid: 20 kPa above the green spring's ~170 kPa running pressure. Equals the 190 kPa peak target, so closed-loop boost at peak target will hit the cut; revisit after B4/B5 |
 | v8 | Ignition | Ign. Adv. (Pri 1), 83 and 97 kPa rows × 2,000–3,000 rpm | 83 kPa: 23.25, 26.25, 28.75; 97 kPa: 19.5, 22.5, 25.0 | −2° each; −1° at 3,500 rpm (83 kPa 30.5→29.5, 97 kPa 26.75→25.75) | 5 of 6 knock retard events on 2026-10-07 were at 2,200–2,650 rpm × 89–115 kPa, cyl 3/2 |
 | v8 | Idle | Idle OL Duty, 80 °C and up | 22.5 | 21.5 | Sweep: 22.5% ≈ 1,030 rpm, 21% ≈ 986; target 1,000 |
@@ -99,11 +100,11 @@ Logs: `logs/2026-07-18_1644_sd_onboard-no3.csv` (259 s, light street driving, ma
 
 ## Open items
 
-**Safety, 2026-10-07: boost solenoid plumbed backwards (confirmed).** Bench test: with the solenoid unpowered, the boost supply port is blocked and the actuator port connects to the vent, so the actuator sees no pressure at 0% duty (below 105 kPa, or if the solenoid loses power) and the wastegate stays shut until the 225 kPa over-boost cut. Above 105 kPa the 65–80% duty then feeds boost *to* the actuator, which fits the 115–117 kPa ceiling. Stay off boost and do not run B4 until it is re-plumbed so unpowered = supply connected to actuator. Don't fix it with `PWM Solenoid Control` = Inverted: that keeps the unsafe failure mode.
+**Fixed 2026-10-07 (Chris re-plumbed the solenoid; C2/C3 will confirm on the road).** Original note: **boost solenoid plumbed backwards (confirmed).** Bench test: with the solenoid unpowered, the boost supply port is blocked and the actuator port connects to the vent, so the actuator sees no pressure at 0% duty (below 105 kPa, or if the solenoid loses power) and the wastegate stays shut until the 225 kPa over-boost cut. Above 105 kPa the 65–80% duty then feeds boost *to* the actuator, which fits the 115–117 kPa ceiling. Stay off boost and do not run B4 until it is re-plumbed so unpowered = supply connected to actuator. Don't fix it with `PWM Solenoid Control` = Inverted: that keeps the unsafe failure mode.
 
 Next: work through `docs/run-sheet_v9.pdf` (re-plumb and leak test, burn v9, off-boost drives on the old fuel, then fresh-fuel boost and knock runs).
 
-- [ ] **Re-plumb boost solenoid.** Unpowered: actuator ↔ vent, supply blocked (confirmed). Check 12 V pairing; if supply ↔ actuator, swap the supply and vent hoses. Re-test: unpowered supply → actuator; 12 V actuator → vent. Required before any boost running or B4
+- [x] **Re-plumb boost solenoid** (done 2026-10-07). Unpowered: actuator ↔ vent, supply blocked (confirmed). Check 12 V pairing; if supply ↔ actuator, swap the supply and vent hoses. Re-test: unpowered supply → actuator; 12 V actuator → vent. Required before any boost running or B4
 - [ ] After re-plumbing, boost duty will hold the gate shut for the first time on this turbo (PID untuned, no initial duty table, 65% step at 105 kPa). v9 sets the over-boost cut to 190 kPa for B4/B5; reset it once duty tables are done
 - [ ] Boost leak test (cap turbo inlet, pressurise intake to ~1 bar) before B4, if not done since the hybrid went on
 - [x] Burn v7 (2026-10-07)
