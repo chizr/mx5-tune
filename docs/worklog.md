@@ -1,6 +1,6 @@
 # MX-5 NB turbo tune — worklog
 
-Last updated 2026-10-04. Calibration in the repo: `calibrations/mx5_nb_me442.mecal` at tag `v7`, **not yet burned or driven**.
+Last updated 2026-10-07. Calibration in the repo: `calibrations/mx5_nb_me442.mecal` at tag `v7`. Burned and driven 2026-10-07 (Part A of the run sheet plus a 20 min drive; filled-in page 1: `docs/run_sheet_v7.jpg`).
 
 ## Car and hardware
 
@@ -57,6 +57,27 @@ Not changed yet: VE table, AFR targets, boost targets, boost duty tables, PID ga
 
 ## Findings so far
 
+### 2026-10-07: first v7 logs
+
+Logs: `logs/2026-10-07_0948_meite-pc_warmup-idle-tests.csv` (cold start, Part A) and `logs/2026-10-07_1028_meite-pc_drive.csv` (20 min drive, max 5,178 rpm / 117 kPa, only ~4 s above 105 kPa). Ambient 15 °C. First per-cylinder knock data on the hybrid turbo.
+
+- **Knock on the hybrid: same cyl 2/3 pattern, and knock control is now acting on it.** Knock retard fired 6 times, each to −7 to −8°, recovering over ~8 s. Five of six were at **2,200–2,650 rpm, 89–115 kPa**, as the car came onto boost, at 22–26° advance. Cylinder 3 logged 7 of 12 knock events, cyl 2 three, cyl 1 and 4 one each. Ratios vs own light-load baseline at 90–140 kPa: cyl 2/3 1.3–1.4×, cyl 1/4 1.1–1.2×, the same as December on the old turbo. The 2,000–3,000 rpm × 83–97 kPa cells (22.5–28.75°) were barely touched by v4/v5, and that is where it happens. Treat as probable light knock. The sixth event (5,178 rpm, 60 kPa, 1st gear, rpm jumped 3,000→5,178 in 0.5 s) looks different: possibly wheelspin/clutch slip or mechanical noise; Chris to say what happened at ~10:46:17.
+- **Knock response is heavy-handed.** Retard step 1.5° with "Rots./retard step" 0 takes it to the 8° limit within ~0.1 s on a single marginal event. Safe, but costs a lot of power for borderline readings.
+- **Return to idle still dips.** After a blip or tip-out, AFR spikes to 17–24 for ~1 s as fuel returns, closed loop winds to +20%, then overshoots to ~12.1 AFR and rpm sags to ~690 (lowest 562 rpm while running). Trim sat at +20% for 8% of the drive: 742 samples were light throttle cruise (VE lean, below), 141 were closed-throttle returns.
+- **Light-load VE still lean in cruise.** Mean trim at 25–45 kPa: +9–14% from 1,200 to 4,100 rpm; 45–100 kPa within ±5%. At idle the picture splits by rpm: in the duty sweep, trim was −7% at 840–900 rpm, ~−2% at 1,000–1,040 and +10–13% at 1,200–1,480 rpm (all 29–32 kPa).
+- **Warm idle: v6 is close.** Target is 1,000 rpm. Sweep (fan off, CL on, coolant 87–92 °C): 30% 1,482; 27% 1,363; 25% 1,191; 23% 1,041; 22% 1,014; 21% 986; 19% 898; 17% 837 rpm. MAP 29–32 kPa throughout, so no extra-air floor: the valve has full authority. The v6 cell (22.5% at 80 °C+) gives ~1,030 rpm. About 21.5% would hit 1,000.
+- **Power steering switch works:** 09:58:31, idle duty 22.5→28.5% (+6%), rpm rose ~100.
+- **Idle spark scatter:** set and seen working (adds advance when rpm is below target, e.g. 23.9° at 689 rpm).
+- **IAT responds now:** 14–19 °C on the drive, rising at idle and falling when moving. Cold start read 12 °C against a stated 15 °C ambient; a cold-soaked intercooler can read under air temperature, so not conclusive. Sensor body: silver (type still unknown).
+- **Dead-time voltage test (A4) inconclusive:** closed-loop trim was frozen (limit 20%→0%) but battery voltage only moved 14.17–14.30 V with loads switched on, so there was nothing to measure.
+- **Gear detection error confirmed:** 3rd read as 2 in 515 of 733 samples; 4th as 3 in 311 of 312.
+- **Hot oil pressure (oil 90–99 °C):** median 258 kPa at 800–1,200 rpm, 367 at 1,800–2,500, 414 at 3,200–4,200; minimum while running 180+ kPa. Clear of v7 limits.
+- **Coolant** peaked at 95 °C with fan cycling. No protection trips.
+- **Boost:** brief only. Duty went straight to the 80% max while spooling (PID saturated below target, as expected for 150 kPa at 2,500 rpm). AFR on boost 11.5–13.1.
+- **Log artefacts:** the last second of the drive log (key-off) shows 113 °C coolant/oil, 50 kPa oil, 6.9 V and 983 knock. Ignore. One 17.5 V single-sample spike in the warm-up log at 10:05:57.
+
+### Earlier (Jul 2026 and Dec 2025 logs)
+
 Biggest finding: closed-loop lambda chasing lean decel readings explains the rich, sagging return to idle. Second: cylinders 2 and 3 show a knock-like pattern at 2,000–4,000 rpm on boost.
 
 Logs: `logs/2026-07-18_1644_sd_onboard-no3.csv` (259 s, light street driving, max 115 kPa) and `logs/2025-12-08_1439_meite-pc_all-channels.csv` (998 s, all channels incl. per-cylinder knock, max 133 kPa). The December log ran the same boosted timing as v1.
@@ -75,16 +96,17 @@ Logs: `logs/2026-07-18_1644_sd_onboard-no3.csv` (259 s, light street driving, ma
 
 ## Open items
 
-Next: burn v7, then work through `docs/run-sheet_v7.pdf` and commit the logs.
+Next: decide v8 (knock region timing, return-to-idle fuelling, idle duty), then Part B of the run sheet.
 
-- [ ] Burn v7 after spot-checking in MEITE: dead time axis accepted, lean protection error direction, oil protection settings
-- [ ] Driveway: idle valve duty sweep (30→17%, fan off, wheel straight) to set warm idle duty for 1,000 rpm
-- [x] Power steering idle-up works (Chris, 2026-10-04); still worth confirming the switch channel in a log
-- [ ] Driveway: idle voltage test for dead times (lights, fan, demister; closed loop off)
-- [ ] Driveway: confirm IAT reads ambient on a cold start; check sensor type
-- [ ] Driveway: idle spark scatter, start ±3°; confirm sign (more advance below target)
-- [ ] Road: overrun / return-to-idle log with v7
-- [ ] Road: knock baseline and reproduction runs
+- [x] Burn v7 (2026-10-07)
+- [x] Idle valve duty sweep (2026-10-07): ~21.5% for 1,000 rpm warm, fan off
+- [x] Power steering idle-up works; confirmed in log 2026-10-07
+- [ ] Idle voltage test for dead times: retry with lower idle rpm or more load so voltage actually drops
+- [x] IAT responds (2026-10-07); sensor type still unknown (silver body)
+- [x] Idle spark scatter set and working (2026-10-07)
+- [x] Overrun / return-to-idle log with v7 (2026-10-07): still dips, see findings
+- [ ] Knock: probable light knock at 2,200–2,650 rpm × 90–115 kPa on cyl 3/2; pull timing there (v8) and re-log
+- [ ] Knock control: consider gentler retard (smaller step or rotations per step) once timing is safer
 - [ ] Road: solenoid unplugged test (spring pressure only)
 - [ ] Road: open loop boost duty steps in 3rd, over-boost cut ~20 kPa above expected
 - [x] Logs vs rebuild: both after (Chris, 2026-10-04)
