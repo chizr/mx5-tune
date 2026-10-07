@@ -2,7 +2,7 @@
 
 ME442 calibration, logs and worklog for an NB1 MX-5 with a TD04HL-19T on a built 1.8 BP.
 
-- Calibrations: `calibrations/mx5_nb_me442_vN.mecal`, one file per version (newest = highest `vN`), each also a git tag. v1–v9 are tags only (`v1` = original 18 Jul file); files start at v10.
+- Calibrations: `calibrations/mx5_nb_me442_vN.mecal`, one file per version (newest = highest `vN`), each also a git tag. Files exist for v7 (rollback: in the car on 2026-10-07), v8 and v10 onward; v1–v6 and v9 are tags only (`v1` = original 18 Jul file).
 - Worklog, change log and open items: `docs/worklog.md`
 - Next test plan: `docs/run-sheet_v10.pdf` (v7 sheet kept for the record)
 - Logs: `logs/` (index in `logs/README.md`)
