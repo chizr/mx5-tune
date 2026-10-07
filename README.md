@@ -4,7 +4,7 @@ ME442 calibration, logs and worklog for an NB1 MX-5 with a TD04HL-19T on a built
 
 - Calibration: `calibrations/mx5_nb_me442.mecal` (versions are git tags `v1`…; `v1` = original 18 Jul file)
 - Worklog, change log and open items: `docs/worklog.md`
-- Next test plan: `docs/run-sheet_v7.pdf`
+- Next test plan: `docs/run-sheet_v9.pdf` (v7 sheet kept for the record)
 - Logs: `logs/` (index in `logs/README.md`)
 
 ## Setup
