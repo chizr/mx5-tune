@@ -38,7 +38,7 @@ def grid(header,rows,widths):
     return t
 st=[]
 st.append(Paragraph('MX-5 NB turbo run sheet',H1))
-st.append(Paragraph(f'Calibration: <b>mx5_nb_me442.mecal</b> at tag <b>{VERSION}</b> &nbsp;&nbsp; Date: ____________ &nbsp;&nbsp; Ambient: ______ °C &nbsp;&nbsp; Fuel: 98 RON, bought ____________',B))
+st.append(Paragraph(f'Calibration: <b>mx5_nb_me442_{VERSION}.mecal</b> &nbsp;&nbsp; Date: ____________ &nbsp;&nbsp; Ambient: ______ °C &nbsp;&nbsp; Fuel: 98 RON, bought ____________',B))
 st.append(Paragraph(f'Part A in the garage, before burning {VERSION}. Part B is everyday driving on the old fuel, <b>off boost</b> (MAP under ~100 kPa), until the tank is low. Part C only on <b>fresh 98</b> and only on a closed road, track day or dyno. Log every drive (all channels, 10 Hz, as on 7 Oct) and note the log number in the box.',S))
 
 st.append(Paragraph('Before you start',H2))

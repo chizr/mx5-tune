@@ -1,6 +1,6 @@
 # MX-5 NB turbo tune — worklog
 
-Last updated 2026-10-07. Calibration in the repo: `calibrations/mx5_nb_me442.mecal` at tag `v10`, **not yet burned or driven** (v8 and v9 also not yet burned; v10 includes both). v7 was burned and driven 2026-10-07 (Part A of the run sheet plus a 20 min drive; filled-in page 1: `docs/run_sheet_v7.jpg`).
+Last updated 2026-10-07. Calibration to load: `calibrations/mx5_nb_me442_v10.mecal` (tag `v10`), **not yet burned or driven** (v8 and v9 also not yet burned; v10 includes both). v7 was burned and driven 2026-10-07 (Part A of the run sheet plus a 20 min drive; filled-in page 1: `docs/run_sheet_v7.jpg`).
 
 ## Car and hardware
 
@@ -28,7 +28,7 @@ Target: about 260–290 crank hp daily on 98 RON, inside stock-piston limits. Th
 
 ## Calibration change log
 
-Versions are git tags on `calibrations/mx5_nb_me442.mecal`. `v1` is the original file (`18Jul_boost_pwm_limits.mecal`). All of v2–v7 were made offline on 2026-10-04 and are reproducible byte-for-byte with `tools/mecal.py`. Newest first.
+Versions are git tags; from v10 each version is also its own file `calibrations/mx5_nb_me442_vN.mecal` (v1–v9: `git show vN:calibrations/mx5_nb_me442.mecal`). `v1` is the original file (`18Jul_boost_pwm_limits.mecal`). All of v2–v7 were made offline on 2026-10-04 and are reproducible byte-for-byte with `tools/mecal.py`. Newest first.
 
 | Tag | Area | Setting | Before | After | Why |
 | --- | --- | --- | --- | --- | --- |
