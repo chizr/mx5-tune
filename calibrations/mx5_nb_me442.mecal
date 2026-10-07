@@ -25903,10 +25903,10 @@
         <float>17.75</float>
         <float>15.75</float>
         <float>18.5</float>
-        <float>23.25</float>
-        <float>26.25</float>
-        <float>28.75</float>
-        <float>30.5</float>
+        <float>21.25</float>
+        <float>24.25</float>
+        <float>26.75</float>
+        <float>29.5</float>
         <float>31.75</float>
         <float>32</float>
         <float>32.5</float>
@@ -25919,10 +25919,10 @@
         <float>17.75</float>
         <float>14.75</float>
         <float>17.5</float>
-        <float>19.5</float>
-        <float>22.5</float>
-        <float>25</float>
-        <float>26.75</float>
+        <float>17.5</float>
+        <float>20.5</float>
+        <float>23</float>
+        <float>25.75</float>
         <float>29</float>
         <float>30.75</float>
         <float>31.25</float>
@@ -30635,12 +30635,12 @@
         <float>24.5</float>
         <float>23.5</float>
         <float>23</float>
-        <float>22.5</float>
-        <float>22.5</float>
-        <float>22.5</float>
-        <float>22.5</float>
-        <float>22.5</float>
-        <float>22.5</float>
+        <float>21.5</float>
+        <float>21.5</float>
+        <float>21.5</float>
+        <float>21.5</float>
+        <float>21.5</float>
+        <float>21.5</float>
       </output>
       <incVal>0.1</incVal>
       <defaultValue>0</defaultValue>

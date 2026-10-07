@@ -1,6 +1,6 @@
 # MX-5 NB turbo tune — worklog
 
-Last updated 2026-10-07. Calibration in the repo: `calibrations/mx5_nb_me442.mecal` at tag `v7`. Burned and driven 2026-10-07 (Part A of the run sheet plus a 20 min drive; filled-in page 1: `docs/run_sheet_v7.jpg`).
+Last updated 2026-10-07. Calibration in the repo: `calibrations/mx5_nb_me442.mecal` at tag `v8`, **not yet burned or driven**. v7 was burned and driven 2026-10-07 (Part A of the run sheet plus a 20 min drive; filled-in page 1: `docs/run_sheet_v7.jpg`).
 
 ## Car and hardware
 
@@ -32,6 +32,8 @@ Versions are git tags on `calibrations/mx5_nb_me442.mecal`. `v1` is the original
 
 | Tag | Area | Setting | Before | After | Why |
 | --- | --- | --- | --- | --- | --- |
+| v8 | Ignition | Ign. Adv. (Pri 1), 83 and 97 kPa rows × 2,000–3,000 rpm | 83 kPa: 23.25, 26.25, 28.75; 97 kPa: 19.5, 22.5, 25.0 | −2° each; −1° at 3,500 rpm (83 kPa 30.5→29.5, 97 kPa 26.75→25.75) | 5 of 6 knock retard events on 2026-10-07 were at 2,200–2,650 rpm × 89–115 kPa, cyl 3/2 |
+| v8 | Idle | Idle OL Duty, 80 °C and up | 22.5 | 21.5 | Sweep: 22.5% ≈ 1,030 rpm, 21% ≈ 986; target 1,000 |
 | v7 | Engine protection | Oil pressure protection (2nd "Enabled" in EPS: Oil) | Off | On | Turbo oil feed is the biggest remaining risk |
 | v7 | Engine protection | Oil P limit (kPa, 1000→4000+ rpm) | 400 flat | 130, 150, 180, 200, 220, 230, 240… | About 55% of the healthy hot minimum in both logs |
 | v7 | Engine protection | Oil trigger time / action | 50 ms / none | 300 ms / 2,000 rpm limit | Ignore brief cornering surge; force a lift on real loss |
@@ -96,7 +98,7 @@ Logs: `logs/2026-07-18_1644_sd_onboard-no3.csv` (259 s, light street driving, ma
 
 ## Open items
 
-Next: decide v8 (knock region timing, return-to-idle fuelling, idle duty), then Part B of the run sheet.
+Next: burn v8. Drive the old fuel down gently (off boost), logging every drive for VE, then fill with fresh 98 before knock and boost runs (B3–B5).
 
 - [x] Burn v7 (2026-10-07)
 - [x] Idle valve duty sweep (2026-10-07): ~21.5% for 1,000 rpm warm, fan off
@@ -105,7 +107,9 @@ Next: decide v8 (knock region timing, return-to-idle fuelling, idle duty), then 
 - [x] IAT responds (2026-10-07); sensor type still unknown (silver body)
 - [x] Idle spark scatter set and working (2026-10-07)
 - [x] Overrun / return-to-idle log with v7 (2026-10-07): still dips, see findings
-- [ ] Knock: probable light knock at 2,200–2,650 rpm × 90–115 kPa on cyl 3/2; pull timing there (v8) and re-log
+- [ ] Knock: v8 pulls 2° at 2,000–3,000 rpm × 83–97 kPa. Re-log on fresh fuel: expect fewer or no retard events, and cyl 3 ratio on boost nearer 1.1–1.2×
+- [ ] Boost: car has only seen ~3 s of boost control (short part-throttle bursts in 1st/2nd). B4 in 3rd at full throttle on fresh fuel will show whether it can make spring pressure
+- [ ] Return-to-idle dip: lean spike (17–24 AFR) as fuel returns after a blip, then CL overshoot. Look at overrun re-entry fuel and closed-throttle fuelling (separate change)
 - [ ] Knock control: consider gentler retard (smaller step or rotations per step) once timing is safer
 - [ ] Road: solenoid unplugged test (spring pressure only)
 - [ ] Road: open loop boost duty steps in 3rd, over-boost cut ~20 kPa above expected
