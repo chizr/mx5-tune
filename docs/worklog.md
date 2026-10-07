@@ -101,7 +101,7 @@ Logs: `logs/2026-07-18_1644_sd_onboard-no3.csv` (259 s, light street driving, ma
 
 **Safety, 2026-10-07: boost solenoid plumbed backwards (confirmed).** Bench test: with the solenoid unpowered, the boost supply port is blocked and the actuator port connects to the vent, so the actuator sees no pressure at 0% duty (below 105 kPa, or if the solenoid loses power) and the wastegate stays shut until the 225 kPa over-boost cut. Above 105 kPa the 65–80% duty then feeds boost *to* the actuator, which fits the 115–117 kPa ceiling. Stay off boost and do not run B4 until it is re-plumbed so unpowered = supply connected to actuator. Don't fix it with `PWM Solenoid Control` = Inverted: that keeps the unsafe failure mode.
 
-Next: work through `docs/run-sheet_v9.pdf` (re-plumb and leak test, burn v9, off-boost drives on the old fuel, then fresh-fuel boost and knock runs). Earlier plan: burn v8. Drive the old fuel down gently (off boost), logging every drive for VE, then fill with fresh 98 before knock and boost runs (B3–B5).
+Next: work through `docs/run-sheet_v9.pdf` (re-plumb and leak test, burn v9, off-boost drives on the old fuel, then fresh-fuel boost and knock runs).
 
 - [ ] **Re-plumb boost solenoid.** Unpowered: actuator ↔ vent, supply blocked (confirmed). Check 12 V pairing; if supply ↔ actuator, swap the supply and vent hoses. Re-test: unpowered supply → actuator; 12 V actuator → vent. Required before any boost running or B4
 - [ ] After re-plumbing, boost duty will hold the gate shut for the first time on this turbo (PID untuned, no initial duty table, 65% step at 105 kPa). v9 sets the over-boost cut to 190 kPa for B4/B5; reset it once duty tables are done
