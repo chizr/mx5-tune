@@ -108,7 +108,7 @@ Next: burn v8. Drive the old fuel down gently (off boost), logging every drive f
 - [x] Idle spark scatter set and working (2026-10-07)
 - [x] Overrun / return-to-idle log with v7 (2026-10-07): still dips, see findings
 - [ ] Knock: v8 pulls 2° at 2,000–3,000 rpm × 83–97 kPa. Re-log on fresh fuel: expect fewer or no retard events, and cyl 3 ratio on boost nearer 1.1–1.2×
-- [ ] Boost: car has only seen ~3 s of boost control (short part-throttle bursts in 1st/2nd). B4 in 3rd at full throttle on fresh fuel will show whether it can make spring pressure
+- [ ] Boost: hybrid tops out at 115–117 kPa in both logs (Jul, Oct), only 2–4 s above 105 kPa; old TD04 (Dec) made 123–132 kPa at 2,500–3,500 rpm on similar part throttle, at 90% duty. Part is the bigger compressor and short bursts, but a ceiling suggests: light green spring cracking early, the 80% `PWM Max Duty` cap (was 90% in Dec), or solenoid plumbed backwards. B4 (0% duty, 3rd, full throttle) gives the spring-only ceiling; B5 duty steps show which way duty moves boost. Look up the green spring's rated pressure
 - [ ] Return-to-idle dip: lean spike (17–24 AFR) as fuel returns after a blip, then CL overshoot. Look at overrun re-entry fuel and closed-throttle fuelling (separate change)
 - [ ] Knock control: consider gentler retard (smaller step or rotations per step) once timing is safer
 - [ ] Road: solenoid unplugged test (spring pressure only)
