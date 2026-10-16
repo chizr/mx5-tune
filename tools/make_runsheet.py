@@ -7,7 +7,7 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 import os
 
-VERSION='v12'  # calibration tag this run sheet is for; output goes to docs/run-sheet_<VERSION>.pdf
+VERSION='v13'  # calibration tag this run sheet is for; output goes to docs/run-sheet_<VERSION>.pdf
 
 # Any TTF with the ☐ glyph (U+2610) will do: DejaVu on Linux, Arial Unicode on macOS.
 FONTS=['/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',
@@ -43,8 +43,8 @@ st.append(Paragraph(f'Part A in the garage, before burning {VERSION}. Part B is 
 
 st.append(Paragraph('Before you start',H2))
 st+= step('',[
- 'Save a copy of the calibration currently in the car (rollback: mx5_nb_me442_v10.mecal or v7).',
- f'Open {VERSION} in MEITE and spot-check: Ign. Adv. (Pri 1) at 2000 / 2500 / 3000 / 3500 / 4000 rpm: 83 kPa = 21.25 / 24.25 / 26.75 / 29.5 / 31.75; 97 kPa = 17.5 / 20.5 / 21.0 / 23.75 / 28.0; 111 kPa = 15.0 / 16.75 / 19.0 / 21.25 / 24.5. Idle OL Duty 80 °C and up = 22.0. Oil Press. HRT first point 0.5 V = 0 kPa; EPS: Oil P Limit 60 / 90 / 130 / 160 / 180 / 190 / 200. Boost Settings: Abs. Max Boost = 190, PWM Min / Max Duty = 0 / 80, PWM Solenoid Control = <b>Normal</b>.',
+ 'Save a copy of the calibration currently in the car (rollback: mx5_nb_me442_v12.mecal).',
+ f'Open {VERSION} in MEITE and spot-check: Ign. Adv. (Pri 1) at 2000 / 2500 / 3000 / 3500 / 4000 rpm: 83 kPa = 21.25 / 24.25 / 26.75 / 29.5 / 31.75; 97 kPa = 17.5 / 20.5 / 21.0 / 23.75 / 28.0; 111 kPa = 15.0 / 16.75 / 19.0 / 21.25 / 24.5. Idle OL Duty 80 °C and up = 22.0. Inj. Base VE (1) 33 kPa row at 1550 / 1850 / 2250 / 2800 rpm = 56.99 / 60.62 / 45.38 / 53.91. Oil Press. HRT first point 0.5 V = 0 kPa; EPS: Oil P Limit 60 / 90 / 130 / 160 / 180 / 190 / 200. Boost Settings: Abs. Max Boost = 190, PWM Min / Max Duty = 0 / 80, PWM Solenoid Control = <b>Normal</b>.',
 ])
 
 st.append(Paragraph('Part A: garage',H2))
