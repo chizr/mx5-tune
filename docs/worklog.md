@@ -132,6 +132,7 @@ Next: work through `docs/run-sheet_v12.pdf` (leak test, burn v12, off-boost driv
 - [x] Idle spark scatter set and working (2026-10-07)
 - [x] Overrun / return-to-idle log with v7 (2026-10-07): still dips, see findings
 - [ ] **Knock at 3,000–3,500 rpm × 98–114 kPa (2026-10-16): no more boost runs until v12 is in and the tank is fresh 98** (octane booster added to the old fuel; run it down). v11 pulls the timing there
+- [ ] Wastegate preload check (engine cold/off): rod preload against the closed flap (per Forge instructions), opening pressure with a hand pump (green should start moving ~5 psi / 0.35 bar), flap seats fully and the arm moves freely. Low preload would let exhaust pressure crack the flap at part throttle and slow spool; ECU logs can't separate this from turbo size. Re-check C2 spring-only boost after any adjustment
 - [ ] Fuel pressure leak-down: after shutdown, watch fuel pressure in MEITE while pinching the return line (holds → regulator) or the feed between pump and rail (holds → pump check valve); neither → injector. Workaround: key on, wait for the pump to stop, crank straight away
 - [x] Oil pressure HRT fixed and oil limits re-based in true kPa (v12). After burning: engine-off oil should read ~0
 - [ ] Idle: v11 sets 22.0% (was 947 rpm at 21.5%). Hot restart still idles ~810 rpm for 20–30 s; look at an after-start idle adder if it persists
