@@ -10,7 +10,7 @@ NB1 MX-5 10th Anniversary (6-speed, no VVT), RHD, ~200,000 km on the car. Built 
 | --- | --- |
 | Engine build | Honed and blueprinted before Dec 2025; ~500 km since (still running in). Stock pistons, new aftermarket forged rods, new bearings, stiffer valve springs, aftermarket damper, coolant reroute |
 | ECU | Motorsport Electronics ME442-V2B-PNP, firmware 4.2.1, tuned in MEITE |
-| Turbo | TD04HL-19T hybrid (ME kit, pre-clocked), internal wastegate. Fitted in 2026 (before Jul), replacing a standard TD04 |
+| Turbo | Eight Nine pre-clocked TD04-19T hybrid (sold by BOFI Racing): billet 19T compressor, HL turbine wheel, **0.41 A/R** turbine housing, Subaru flange, internal wastegate with port enlarged 11%. Vendor rates it ~300 hp and says it keeps standard TD04 spool; supplied with an 8 psi actuator. Fitted in 2026 (before Jul), replacing a standard TD04 |
 | Wastegate actuator | Forge, single port, green spring (lightest in Forge's kit). Forge rating (T2 049): starts opening ~5 psi / 0.35 bar (~135 kPa abs), running ~10 psi / 0.7 bar (~170 kPa abs); the 048 (big) green is 0.7 bar. Fitted with the hybrid. A stronger Forge spring is on hand |
 | Intake and exhaust | Skunk2 intake; sports cat; full 2.5" exhaust |
 | Boost solenoid | Pierburg 3-port, 30 Hz, on LS1 |
@@ -132,7 +132,7 @@ Next: work through `docs/run-sheet_v12.pdf` (leak test, burn v12, off-boost driv
 - [x] Idle spark scatter set and working (2026-10-07)
 - [x] Overrun / return-to-idle log with v7 (2026-10-07): still dips, see findings
 - [ ] **Knock at 3,000–3,500 rpm × 98–114 kPa (2026-10-16): no more boost runs until v12 is in and the tank is fresh 98** (octane booster added to the old fuel; run it down). v11 pulls the timing there
-- [ ] Wastegate preload check (engine cold/off): rod preload against the closed flap (per Forge instructions), opening pressure with a hand pump (green should start moving ~5 psi / 0.35 bar), flap seats fully and the arm moves freely. Low preload would let exhaust pressure crack the flap at part throttle and slow spool; ECU logs can't separate this from turbo size. Re-check C2 spring-only boost after any adjustment
+- [ ] Wastegate preload check (engine cold/off) — higher priority now: the turbo's small 0.41 A/R housing and the vendor's "standard TD04 spool" claim mean turbo size alone shouldn't cost 20–30 kPa at part throttle, and its 11% larger wastegate port gives exhaust pressure more area to push the flap open against the light green spring (opens ~5 psi vs the vendor's 8 psi actuator). Aim for opening pressure near 8 psi with preload, or try the supplied 8 psi actuator if available. Check: rod preload against the closed flap (per Forge instructions), opening pressure with a hand pump (green should start moving ~5 psi / 0.35 bar), flap seats fully and the arm moves freely. Low preload would let exhaust pressure crack the flap at part throttle and slow spool; ECU logs can't separate this from turbo size. Re-check C2 spring-only boost after any adjustment
 - [ ] Fuel pressure leak-down: after shutdown, watch fuel pressure in MEITE while pinching the return line (holds → regulator) or the feed between pump and rail (holds → pump check valve); neither → injector. Workaround: key on, wait for the pump to stop, crank straight away
 - [x] Oil pressure HRT fixed and oil limits re-based in true kPa (v12). After burning: engine-off oil should read ~0
 - [ ] Idle: v11 sets 22.0% (was 947 rpm at 21.5%). Hot restart still idles ~810 rpm for 20–30 s; look at an after-start idle adder if it persists
