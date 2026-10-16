@@ -67,7 +67,7 @@ Not changed yet: VE table, AFR targets, boost targets, boost duty tables, PID ga
 
 ### 2026-10-17: first v12 drive (44 min)
 
-Logs: `logs/2026-10-17_0834_meite-pc_key-on-leakdown.csv`, `logs/2026-10-17_0837_meite-pc_cold-start-drive.csv`. BOV disconnected by Chris (to rule out a boost leak). Fuel: old tank with octane booster (to confirm).
+Logs: `logs/2026-10-17_0834_meite-pc_key-on-leakdown.csv`, `logs/2026-10-17_0837_meite-pc_cold-start-drive.csv`. BOV reference (vacuum) line removed and capped by Chris, to rule out a boost leak. Caveat: with no reference, the BOV can't vent on lift (compressor surge) and, on many designs, is held shut on boost by its spring alone, so it may leak *more*. Bench-test it (10–15 psi on the inlet, reference open; then vacuum on the reference should open it) or blank it off; otherwise reconnect. Fuel: old tank with octane booster (to confirm).
 
 - **v12 oil fix works:** engine-off 1.9 kPa. Hot idle 149–160 kPa true.
 - **Idle on target:** fan off 996 rpm at 22.0%; fan on 988–1,030 at 24%. Warm idle MAP 31.9 kPa (p5–p95 30.6–33.8): ~70 kPa / ~20.7 inHg below atmosphere, normal for a healthy BP and steady (no sign of a vacuum leak).
@@ -145,6 +145,7 @@ Next: work through `docs/run-sheet_v12.pdf` (leak test, burn v12, off-boost driv
 - [x] Overrun / return-to-idle log with v7 (2026-10-07): still dips, see findings
 - [ ] **Knock at 3,000–3,500 rpm × 98–114 kPa (2026-10-16): no more boost runs until v12 is in and the tank is fresh 98** (octane booster added to the old fuel; run it down). v11 pulls the timing there
 - [ ] Wastegate preload check (engine cold/off) — higher priority now: the turbo's small 0.41 A/R housing and the vendor's "standard TD04 spool" claim mean turbo size alone shouldn't cost 20–30 kPa at part throttle, and its 11% larger wastegate port gives exhaust pressure more area to push the flap open against the light green spring (opens ~5 psi vs the vendor's 8 psi actuator). Aim for opening pressure near 8 psi with preload, or try the supplied 8 psi actuator if available. Check: rod preload against the closed flap (per Forge instructions), opening pressure with a hand pump (green should start moving ~5 psi / 0.35 bar), flap seats fully and the arm moves freely. Low preload would let exhaust pressure crack the flap at part throttle and slow spool; ECU logs can't separate this from turbo size. Re-check C2 spring-only boost after any adjustment
+- [ ] BOV: bench-test (holds 10–15 psi on the inlet with reference open; opens on vacuum) or blank off for a test; don't drive long with the reference line removed (surge on lift)
 - [ ] Fuel pressure leak-down: after shutdown, watch fuel pressure in MEITE while pinching the return line (holds → regulator) or the feed between pump and rail (holds → pump check valve); neither → injector. Workaround: key on, wait for the pump to stop, crank straight away
 - [x] Oil pressure HRT fixed and oil limits re-based in true kPa (v12). After burning: engine-off oil should read ~0
 - [ ] Idle: v11 sets 22.0% (was 947 rpm at 21.5%). Hot restart still idles ~810 rpm for 20–30 s; look at an after-start idle adder if it persists
