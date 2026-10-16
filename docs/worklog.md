@@ -1,6 +1,6 @@
 # MX-5 NB turbo tune — worklog
 
-Last updated 2026-10-07. Calibration to load: `calibrations/mx5_nb_me442_v10.mecal` (tag `v10`), **not yet burned or driven** (v8 and v9 also not yet burned; v10 includes both). v7 was burned and driven 2026-10-07 (Part A of the run sheet plus a 20 min drive; filled-in page 1: `docs/run_sheet_v7.jpg`).
+Last updated 2026-10-07. Calibration to load: `calibrations/mx5_nb_me442_v12.mecal` (tag `v12`), **not yet burned or driven**; it includes v11. v10 was in the car for the 2026-10-16 logs (assumed). v7 was burned and driven 2026-10-07 (Part A of the run sheet plus a 20 min drive; filled-in page 1: `docs/run_sheet_v7.jpg`).
 
 ## Car and hardware
 
@@ -32,6 +32,10 @@ Versions are git tags; from v10 each version is also its own file `calibrations/
 
 | Tag | Area | Setting | Before | After | Why |
 | --- | --- | --- | --- | --- | --- |
+| v12 | Sensors | Oil Press. HRT first point | 0 V → 0 kPa | 0.5 V → 0 kPa | Matches the sensor doc (0.5 V = 0, 4.5 V = 1,000 kPa). Engine-off oil read 113 kPa; oil pressure now logs true gauge kPa (true ≈ 1.125 × old − 125) |
+| v12 | Engine protection | EPS: Oil P Limit (1,000→4,000+ rpm, true kPa) | 130, 150, 180, 200, 220, 230, 240… (= true 21, 44, 78, 100, 123, 134, 145) | 60, 90, 130, 160, 180, 190, 200… | ~55% of the lowest normal hot readings (true p5: idle 143, 2,000 rpm 255, 3,000 rpm 304, 4,000 rpm 331, 5,000 rpm 354). Old limits were near zero at low rpm in true terms |
+| v11 | Ignition | Ign. Adv. (Pri 1), 97 kPa × 3,000/3,500/4,000 rpm; 111 kPa × 2,500–4,000 rpm | 97: 23.0, 25.75, 29.0; 111: 17.75, 21.0, 23.25, 25.5 | 97: 21.0, 23.75, 28.0; 111: 16.75, 19.0, 21.25, 24.5 (−2° at 3,000/3,500, −1° at 2,500/111 and 4,000) | 2026-10-16: 7 knock retard events at 2,740–3,530 rpm × 98–114 kPa, cyl 2/3 |
+| v11 | Idle | Idle OL Duty, 80 °C and up | 21.5 | 22.0 | Warm idle 947 rpm fan off at 21.5% (target 1,000) |
 | v10 | Boost | PWM Min Duty | 10% | 0% | Solenoid re-plumbed: less duty now means less boost, so a lower floor is safe, and C2 (0% duty) becomes a true spring-only test instead of possibly clamping to 10%. PWM Max Duty stays 80% until C3 duty steps show what duty gives the 190 kPa peak target |
 | v9 | Boost | Abs. Max Boost (over-boost cut) | 225 kPa | 190 kPa (temporary) | First boost runs after re-plumbing the solenoid: 20 kPa above the green spring's ~170 kPa running pressure. Equals the 190 kPa peak target, so closed-loop boost at peak target will hit the cut; revisit after B4/B5 |
 | v8 | Ignition | Ign. Adv. (Pri 1), 83 and 97 kPa rows × 2,000–3,000 rpm | 83 kPa: 23.25, 26.25, 28.75; 97 kPa: 19.5, 22.5, 25.0 | −2° each; −1° at 3,500 rpm (83 kPa 30.5→29.5, 97 kPa 26.75→25.75) | 5 of 6 knock retard events on 2026-10-07 were at 2,200–2,650 rpm × 89–115 kPa, cyl 3/2 |
@@ -114,7 +118,7 @@ Logs: `logs/2026-07-18_1644_sd_onboard-no3.csv` (259 s, light street driving, ma
 
 **Fixed 2026-10-07 (Chris re-plumbed the solenoid; C2/C3 will confirm on the road).** Original note: **boost solenoid plumbed backwards (confirmed).** Bench test: with the solenoid unpowered, the boost supply port is blocked and the actuator port connects to the vent, so the actuator sees no pressure at 0% duty (below 105 kPa, or if the solenoid loses power) and the wastegate stays shut until the 225 kPa over-boost cut. Above 105 kPa the 65–80% duty then feeds boost *to* the actuator, which fits the 115–117 kPa ceiling. Stay off boost and do not run B4 until it is re-plumbed so unpowered = supply connected to actuator. Don't fix it with `PWM Solenoid Control` = Inverted: that keeps the unsafe failure mode.
 
-Next: work through `docs/run-sheet_v10.pdf` (re-plumb and leak test, burn v10, off-boost drives on the old fuel, then fresh-fuel boost and knock runs).
+Next: work through `docs/run-sheet_v12.pdf` (leak test, burn v12, off-boost drives on the old fuel, then fresh-fuel boost and knock runs).
 
 - [x] **Re-plumb boost solenoid** (done 2026-10-07). Unpowered: actuator ↔ vent, supply blocked (confirmed). Check 12 V pairing; if supply ↔ actuator, swap the supply and vent hoses. Re-test: unpowered supply → actuator; 12 V actuator → vent. Required before any boost running or B4
 - [ ] After re-plumbing, boost duty will hold the gate shut for the first time on this turbo (PID untuned, no initial duty table, 65% step at 105 kPa). v9 sets the over-boost cut to 190 kPa for B4/B5; reset it once duty tables are done
@@ -126,10 +130,10 @@ Next: work through `docs/run-sheet_v10.pdf` (re-plumb and leak test, burn v10, o
 - [x] IAT responds (2026-10-07); sensor type still unknown (silver body)
 - [x] Idle spark scatter set and working (2026-10-07)
 - [x] Overrun / return-to-idle log with v7 (2026-10-07): still dips, see findings
-- [ ] **Knock at 3,000–3,500 rpm × 98–114 kPa (2026-10-16): no more boost runs until timing is pulled there and the tank is fresh 98.** Proposed v11: −2° at 3,000/3,500 rpm on 97/111 kPa rows, −1° at 2,500/111 and 4,000 × 97/111
+- [ ] **Knock at 3,000–3,500 rpm × 98–114 kPa (2026-10-16): no more boost runs until v12 is in and the tank is fresh 98** (octane booster added to the old fuel; run it down). v11 pulls the timing there
 - [ ] Fuel pressure leak-down: after shutdown, watch fuel pressure in MEITE while pinching the return line (holds → regulator) or the feed between pump and rail (holds → pump check valve); neither → injector. Workaround: key on, wait for the pump to stop, crank straight away
-- [ ] Oil pressure HRT: confirm sensor full-scale from the doc's HRT image (assumed 0.5 V = 0, 4.5 V = 1,000 kPa), then add the 0.5 V→0 point and re-base EPS oil limits in true kPa (proposed 60, 90, 130, 160, 180, 190, 200+ at 1,000→4,000+ rpm, ~55% of hot p5)
-- [ ] Idle: 947 rpm fan off at 21.5%; try 22.0%. Hot restart idles ~810 rpm for 20–30 s
+- [x] Oil pressure HRT fixed and oil limits re-based in true kPa (v12). After burning: engine-off oil should read ~0
+- [ ] Idle: v11 sets 22.0% (was 947 rpm at 21.5%). Hot restart still idles ~810 rpm for 20–30 s; look at an after-start idle adder if it persists
 - [ ] Knock: v8 pulls 2° at 2,000–3,000 rpm × 83–97 kPa. Re-log on fresh fuel: expect fewer or no retard events, and cyl 3 ratio on boost nearer 1.1–1.2×
 - [ ] Boost: hybrid tops out at 115–117 kPa in both logs (Jul, Oct), only 2–4 s above 105 kPa; old TD04 (Dec) made 123–132 kPa at 2,500–3,500 rpm on similar part throttle, at 90% duty. Part is the bigger compressor and short bursts, but a ceiling suggests: light green spring cracking early, the 80% `PWM Max Duty` cap (was 90% in Dec), or solenoid plumbed backwards. B4 (0% duty, 3rd, full throttle) gives the spring-only ceiling; B5 duty steps show which way duty moves boost. Green spring rating (Forge): opens ~135 kPa abs, runs ~170 kPa abs, so it can't explain a 115–117 kPa ceiling even with the backwards plumbing. More likely the low boost is mostly short part-throttle bursts plus the bigger compressor. Keep the green spring: its spring-only boost already sits inside the 150–190 kPa targets, and a stronger one would raise the floor and the failure-mode boost above what stock pistons should see
 - [ ] Return-to-idle dip: lean spike (17–24 AFR) as fuel returns after a blip, then CL overshoot. Look at overrun re-entry fuel and closed-throttle fuelling (separate change)
@@ -159,7 +163,7 @@ Log everything the December log had, at 10 Hz, including per-cylinder knock (off
 | Closed-throttle decel MAP | 17–25 kPa |
 | Warm idle (July) | ~1,214 rpm at 27.1% duty (fan on) |
 | Knock noise floor, loudest cylinder (clean, 35–90 kPa) | ~250–300 below 3,000 rpm; ~370 at 4,000–4,500 |
-| Hot oil pressure, normal minimum | ~245 kPa @1,000; ~320 @2,000; ~385 @3,000; ~445 @5,000 rpm |
+| Hot oil pressure (true gauge, from v12) | median ~167 kPa at idle (p5 143); ~292 @1,800–2,500; ~320 @2,500–3,200; ~365 @4,200–5,500 rpm. Logs before v12 read 1.125×true+~110 high |
 | Fuel pressure | 300 kPa above MAP |
 | Battery voltage, running | 13.8–14.6 V |
 | Injector headroom | 640 cc × 4 at 85% duty ≈ 330–350 crank hp |

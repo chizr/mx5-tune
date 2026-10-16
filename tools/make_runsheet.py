@@ -7,7 +7,7 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 import os
 
-VERSION='v10'  # calibration tag this run sheet is for; output goes to docs/run-sheet_<VERSION>.pdf
+VERSION='v12'  # calibration tag this run sheet is for; output goes to docs/run-sheet_<VERSION>.pdf
 
 # Any TTF with the ☐ glyph (U+2610) will do: DejaVu on Linux, Arial Unicode on macOS.
 FONTS=['/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',
@@ -43,27 +43,20 @@ st.append(Paragraph(f'Part A in the garage, before burning {VERSION}. Part B is 
 
 st.append(Paragraph('Before you start',H2))
 st+= step('',[
- 'Save a copy of the calibration currently in the car (v7, for rollback).',
- f'Open {VERSION} in MEITE and spot-check: Ign. Adv. (Pri 1) 83 kPa row at 2000 / 2500 / 3000 / 3500 rpm = 21.25 / 24.25 / 26.75 / 29.5; 97 kPa row = 17.5 / 20.5 / 23.0 / 25.75. Idle OL Duty 80 °C and up = 21.5. Boost Settings: Abs. Max Boost = 190, PWM Min / Max Duty = 0 / 80, PWM Solenoid Control = <b>Normal</b>.',
+ 'Save a copy of the calibration currently in the car (rollback: mx5_nb_me442_v10.mecal or v7).',
+ f'Open {VERSION} in MEITE and spot-check: Ign. Adv. (Pri 1) at 2000 / 2500 / 3000 / 3500 / 4000 rpm: 83 kPa = 21.25 / 24.25 / 26.75 / 29.5 / 31.75; 97 kPa = 17.5 / 20.5 / 21.0 / 23.75 / 28.0; 111 kPa = 15.0 / 16.75 / 19.0 / 21.25 / 24.5. Idle OL Duty 80 °C and up = 22.0. Oil Press. HRT first point 0.5 V = 0 kPa; EPS: Oil P Limit 60 / 90 / 130 / 160 / 180 / 190 / 200. Boost Settings: Abs. Max Boost = 190, PWM Min / Max Duty = 0 / 80, PWM Solenoid Control = <b>Normal</b>.',
 ])
 
 st.append(Paragraph('Part A: garage',H2))
-st+= step('A1. Re-plumb the boost solenoid (engine off)',[
- 'Photo or label the three hoses as they are now: supply (from boost source), actuator, vent.',
- 'Swap the <b>supply</b> and <b>vent</b> hoses at the solenoid. Leave the actuator hose where it is.',
- 'Pull the actuator hose off <i>at the actuator</i> so air can come out. Test with 12 V straight across the solenoid (cleaner than MEITE, which caps duty at 80%).',
- '<b>Unpowered:</b> blow into supply. Air comes out of the actuator hose? Y / N',
- '<b>12 V:</b> blow into supply. Blocked? Y / N. Blow into the actuator hose. Comes out of the vent? Y / N',
- 'Reconnect the actuator hose. Check all clamps, and that no hose is kinked or touching the turbo.'],
- note='If any answer is N, stop and send the results before driving. Do not "fix" it with PWM Solenoid Control = Inverted: that keeps the unsafe failure mode.')
-st+= step('A2. Boost leak test',[
+st+= step('A1. Boost leak test',[
  'Cap the turbo inlet. Pressurise the intake to about 1 bar (15 psi) through a fitting (e.g. a vacuum port or the BOV line).',
  'Listen, and spray soapy water on: compressor outlet, intercooler and its couplers, throttle body, BOV, vacuum lines, PCV, solenoid hoses.',
  'Leaks found and fixed: ______________________________'],
  note='A slow leak-down through the engine itself (open valves) is normal. Hissing at a joint is not.')
-st+= step(f'A3. Burn {VERSION}, then warm idle check',[
+st+= step(f'A2. Burn {VERSION}, then warm idle check',[
  f'Burn {VERSION}. Warm fully (coolant 85 °C+).',
- 'Fan off, wheel straight: idle ______ rpm (expect ~1,000). Fan on: ______ rpm (expect ~1,050–1,100).'],
+ 'Fan off, wheel straight: idle ______ rpm (expect ~1,000). Fan on: ______ rpm (expect ~1,050–1,100).',
+ 'Engine off, key on: oil pressure reads ~0 kPa (was ~113 before v12)? Y / N'],
  note='Log no: ______')
 
 st.append(Paragraph('Part B: everyday driving on the old fuel (off boost)',H2))
