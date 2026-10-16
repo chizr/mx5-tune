@@ -1,6 +1,6 @@
 # MX-5 NB turbo tune — worklog
 
-Last updated 2026-10-07. Calibration to load: `calibrations/mx5_nb_me442_v12.mecal` (tag `v12`), **not yet burned or driven**; it includes v11. v10 was in the car for the 2026-10-16 logs (assumed). v7 was burned and driven 2026-10-07 (Part A of the run sheet plus a 20 min drive; filled-in page 1: `docs/run_sheet_v7.jpg`).
+Last updated 2026-10-07. Calibration in the car: `calibrations/mx5_nb_me442_v12.mecal` (tag `v12`), burned and driven 2026-10-17 (oil now reads ~2 kPa engine-off). v7 was burned and driven 2026-10-07 (Part A of the run sheet plus a 20 min drive; filled-in page 1: `docs/run_sheet_v7.jpg`).
 
 ## Car and hardware
 
@@ -64,6 +64,18 @@ Versions are git tags; from v10 each version is also its own file `calibrations/
 Not changed yet: VE table, AFR targets, boost targets, boost duty tables, PID gains, idle spark scatter, fuel pressure protection, oil temperature protection.
 
 ## Findings so far
+
+### 2026-10-17: first v12 drive (44 min)
+
+Logs: `logs/2026-10-17_0834_meite-pc_key-on-leakdown.csv`, `logs/2026-10-17_0837_meite-pc_cold-start-drive.csv`. BOV disconnected by Chris (to rule out a boost leak). Fuel: old tank with octane booster (to confirm).
+
+- **v12 oil fix works:** engine-off 1.9 kPa. Hot idle 149–160 kPa true.
+- **Idle on target:** fan off 996 rpm at 22.0%; fan on 988–1,030 at 24%. Warm idle MAP 31.9 kPa (p5–p95 30.6–33.8): ~70 kPa / ~20.7 inHg below atmosphere, normal for a healthy BP and steady (no sign of a vacuum leak).
+- **MAP sensor:** HRT is linear 0 V = 5 kPa to 5 V = 400 kPa (4-bar). Engine off it reads 101.8–102.0 kPa across three logs: plausible barometric pressure. To verify, compare with a nearby weather station's *station* pressure (not sea-level QNH) at the time of a key-on log.
+- **Fuel pressure leak-down confirmed:** 161 → 97 kPa in 20 s, 58 at 60 s, 23 at 194 s. Cold start with 21 kPa at crank took 2.5 s.
+- **Knock: now cylinder 3, and partly off boost.** 6 retard events, cyl 3 14 of 17 counts. Events at 2,750–2,985 rpm × 92–110 kPa (20.7–22.4° at 92–99 kPa: still fed by the 83 kPa row's 24.25–26.75° at 2,500–3,000), one at 1,448 rpm × 86 kPa / 15% TPS, and one at **3,371 rpm × 46 kPa with 2% TPS**, which can't be detonation: cyl 3's window is picking up noise. Ratios on boost: cyl 3 1.35–1.69×, cyl 2 1.33–1.50×, cyl 1/4 1.1–1.2×. Real knock and noise are now mixed; det cans on a dyno are the way to separate them. Possible cyl 3 noise sources: loose heat shield or exhaust contact near the sensor, injector or valvetrain tick (stiffer springs).
+- **Boost:** still short bursts (longest 2.1 s above 105 kPa; only 26 samples at 90%+ TPS). Peak 123 kPa in 2nd at 60% TPS. Can't judge the BOV change from this.
+
 
 ### 2026-10-16: cold/hot starts and first full-throttle runs (v10 assumed)
 
