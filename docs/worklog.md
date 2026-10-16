@@ -74,6 +74,8 @@ Logs: `logs/2026-10-17_0834_meite-pc_key-on-leakdown.csv`, `logs/2026-10-17_0837
 - **MAP sensor:** HRT is linear 0 V = 5 kPa to 5 V = 400 kPa (4-bar). Engine off it reads 101.8–102.0 kPa across three logs: plausible barometric pressure. To verify, compare with a nearby weather station's *station* pressure (not sea-level QNH) at the time of a key-on log.
 - **Fuel pressure leak-down confirmed:** 161 → 97 kPa in 20 s, 58 at 60 s, 23 at 194 s. Cold start with 21 kPa at crank took 2.5 s.
 - **Knock: now cylinder 3, and partly off boost.** 6 retard events, cyl 3 14 of 17 counts. Events at 2,750–2,985 rpm × 92–110 kPa (20.7–22.4° at 92–99 kPa: still fed by the 83 kPa row's 24.25–26.75° at 2,500–3,000), one at 1,448 rpm × 86 kPa / 15% TPS, and one at **3,371 rpm × 46 kPa with 2% TPS**, which can't be detonation: cyl 3's window is picking up noise. Ratios on boost: cyl 3 1.35–1.69×, cyl 2 1.33–1.50×, cyl 1/4 1.1–1.2×. Real knock and noise are now mixed; det cans on a dyno are the way to separate them. Possible cyl 3 noise sources: loose heat shield or exhaust contact near the sensor, injector or valvetrain tick (stiffer springs).
+- **Light-load VE hole, confirmed.** Warm, closed-loop trim sat at its +20% limit 16% of the time, nearly all in light cruise (0.5–15% TPS, 33–42 kPa, 1,800–3,200 rpm), where AFR still read 15.4–16.8. From steady closed-loop samples in both warm drives (trim × measured AFR ÷ target), the base VE needs ×1.15–1.39 at 24–43 kPa × 1,550–3,400 rpm (worst 33 kPa × 2,250 rpm, ×1.39, 1,197 samples), ×1.05–1.08 at 53 kPa, ~×1.0 from 64 kPa up. The 2,250 rpm column is 20–30% below its neighbours at 24–43 kPa.
+- **Acceleration fuelling is adequate.** 19 tip-ins from steady fuelled running: median lean blip only +0.5 AFR over target in the first 0.5 s (above +1.5 in 20–30%), then a rich trough of −1.2 to −2.3 AFR. The big lean readings on tip-in are from coming straight out of overrun fuel cut (exhaust still lean at the sensor) or from the lean cruise cells above. On boost AFR 11.7–12.4 vs 12.4–12.9 target: slightly richer than target.
 - **Boost:** still short bursts (longest 2.1 s above 105 kPa; only 26 samples at 90%+ TPS). Peak 123 kPa in 2nd at 60% TPS. BOV was still connected here.
 
 
@@ -159,7 +161,7 @@ Next: work through `docs/run-sheet_v12.pdf` (leak test, burn v12, off-boost driv
 - [x] Jul 2026 log was on the hybrid with the Forge actuator (Chris, 2026-10-04)
 - [ ] Fix gear detection: record tyre size and confirm the final drive, then check `VSS Calc. Speed` against GPS speed and correct the VSS/final drive settings
 - [ ] Fill boost CL initial duty table from duty-step logs; enable "use initial duty table"; revisit PID
-- [ ] Correct light-load VE from the new overrun log (or long term trim, then bake in)
+- [ ] Correct light-load VE (proposed v13): multiply Inj. Base VE (1) cells at 24–53 kPa × 1,250–3,400 rpm by the measured factors (×1.05–1.39), from 2026-10-16/17 steady closed-loop data
 - [ ] Extend top VE row 205 → ~230 kPa before raising boost targets
 - [ ] Ask Motorsport Electronics for the INJ-650 dead time table; read injector part number if visible
 - [ ] ME442 manual: does fuel pressure protection compare fuel − MAP? What does "CL Req. Boost Delta" do?
