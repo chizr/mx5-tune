@@ -1,0 +1,903 @@
+{
+ "frame_len": 840,
+ "product": "ME442-V2B-PNP",
+ "firmware": "4.2.1",
+ "def_version": 62,
+ "note": "Offsets found by matching a PC log to Comms Log frames recorded together. alt_offsets: other places the same values appeared (copies, or equal channels).",
+ "channels": {
+  "Battery Voltage Raw": {
+   "offset": 9,
+   "type": "u16",
+   "scale": 1,
+   "frac": 0.998,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Battery Voltage": {
+   "offset": 11,
+   "type": "f32",
+   "scale": 1,
+   "frac": 0.998,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Intake Air Temp. Raw": {
+   "offset": 15,
+   "type": "u16",
+   "scale": 1,
+   "frac": 0.998,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Coolant Temp. Raw": {
+   "offset": 19,
+   "type": "u16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Coolant Temp.": {
+   "offset": 21,
+   "type": "i16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Oil Temp. Raw": {
+   "offset": 43,
+   "type": "u16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Oil Temp.": {
+   "offset": 45,
+   "type": "i16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Oil Press. Raw": {
+   "offset": 47,
+   "type": "u16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Oil Press.": {
+   "offset": 49,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Fuel Press. Raw": {
+   "offset": 53,
+   "type": "u16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Fuel Press.": {
+   "offset": 55,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Inj. Pri. Start Angle": {
+   "offset": 76,
+   "type": "i16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Inj. CLT Trim": {
+   "offset": 90,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Inj. Dead Time": {
+   "offset": 102,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Inj. Target AFR": {
+   "offset": 106,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Inj. Base VE Out.": {
+   "offset": 110,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [
+    118
+   ],
+   "captures": 1
+  },
+  "Inj. VE Total": {
+   "offset": 110,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [
+    118
+   ],
+   "captures": 1
+  },
+  "Inj. Base PW": {
+   "offset": 126,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Inj. Lambda Trim": {
+   "offset": 154,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "AE CLT Trim": {
+   "offset": 202,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "AE MAP Delta": {
+   "offset": 214,
+   "type": "i16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Start. Inj. Priming Pulse": {
+   "offset": 228,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Idle OL Duty": {
+   "offset": 233,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [
+    243
+   ],
+   "captures": 1
+  },
+  "Idle PWM Duty": {
+   "offset": 233,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [
+    243
+   ],
+   "captures": 1
+  },
+  "Idle Target RPM Err.": {
+   "offset": 255,
+   "type": "i16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Idle Target RPM": {
+   "offset": 257,
+   "type": "u16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Lim. Hard RPM Curr.": {
+   "offset": 263,
+   "type": "u16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Alt. Ctrl. Duty": {
+   "offset": 276,
+   "type": "u16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Lambda AFR Err. 1": {
+   "offset": 307,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [
+    324
+   ],
+   "captures": 1
+  },
+  "Lambda AFR Err. 2": {
+   "offset": 307,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [
+    324
+   ],
+   "captures": 1
+  },
+  "Lambda Curr AFR 1": {
+   "offset": 316,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [
+    320,
+    777
+   ],
+   "captures": 1
+  },
+  "Lambda Curr AFR 2": {
+   "offset": 316,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [
+    320,
+    777
+   ],
+   "captures": 1
+  },
+  "Int. WB AFR": {
+   "offset": 316,
+   "type": "f32",
+   "scale": 1,
+   "frac": 0.989,
+   "alt_offsets": [
+    320,
+    777
+   ],
+   "captures": 1
+  },
+  "Knock Cyl 1 Window Start": {
+   "offset": 397,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Knock CLT Scaling": {
+   "offset": 403,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Knock Acc. Lvl.": {
+   "offset": 407,
+   "type": "u16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Knock Reading Raw": {
+   "offset": 409,
+   "type": "u16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [
+    414
+   ],
+   "captures": 1
+  },
+  "Knock Reading Peak": {
+   "offset": 409,
+   "type": "u16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [
+    414
+   ],
+   "captures": 1
+  },
+  "Knock Status": {
+   "offset": 413,
+   "type": "u8",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Knock Cyl 1 Peak": {
+   "offset": 418,
+   "type": "u16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Knock Cyl 2 Peak": {
+   "offset": 420,
+   "type": "u16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Knock Cyl 3 Peak": {
+   "offset": 422,
+   "type": "u16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Knock Cyl 4 Peak": {
+   "offset": 424,
+   "type": "u16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "VVT A Cam Curr. Adv.": {
+   "offset": 476,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Crank IRQs": {
+   "offset": 508,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Cam A IRQs": {
+   "offset": 512,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "RPM": {
+   "offset": 537,
+   "type": "u16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Airflow Est.": {
+   "offset": 544,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Fuelfow Est.": {
+   "offset": 548,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Boost Target MAP Err.": {
+   "offset": 570,
+   "type": "i16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "MAP Raw": {
+   "offset": 572,
+   "type": "u16",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "MAP": {
+   "offset": 574,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [
+    584
+   ],
+   "captures": 1
+  },
+  "Primary Load": {
+   "offset": 574,
+   "type": "f32",
+   "scale": 1,
+   "frac": 0.987,
+   "alt_offsets": [
+    584
+   ],
+   "captures": 1
+  },
+  "TPS Raw": {
+   "offset": 578,
+   "type": "u16",
+   "scale": 1,
+   "frac": 0.987,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "O2 Raw": {
+   "offset": 592,
+   "type": "u16",
+   "scale": 1,
+   "frac": 0.987,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Lambda Ext. AFR": {
+   "offset": 598,
+   "type": "f32",
+   "scale": 1,
+   "frac": 0.998,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Ign. Dwell Base Out": {
+   "offset": 602,
+   "type": "f32",
+   "scale": 1,
+   "frac": 0.987,
+   "alt_offsets": [
+    744
+   ],
+   "captures": 1
+  },
+  "Ign. Dwell Final": {
+   "offset": 602,
+   "type": "f32",
+   "scale": 1,
+   "frac": 0.987,
+   "alt_offsets": [
+    744
+   ],
+   "captures": 1
+  },
+  "Ign. Adv. Base Out.": {
+   "offset": 606,
+   "type": "f32",
+   "scale": 1,
+   "frac": 0.989,
+   "alt_offsets": [
+    748
+   ],
+   "captures": 1
+  },
+  "Ign. Adv. Final": {
+   "offset": 606,
+   "type": "f32",
+   "scale": 1,
+   "frac": 0.989,
+   "alt_offsets": [
+    748
+   ],
+   "captures": 1
+  },
+  "CAN TXd Count": {
+   "offset": 638,
+   "type": "u16",
+   "scale": 1,
+   "frac": 0.989,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Inj. Pri. PW Final": {
+   "offset": 756,
+   "type": "f32",
+   "scale": 1,
+   "frac": 0.987,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "CLT Out Delay": {
+   "offset": 760,
+   "type": "u16",
+   "scale": 1,
+   "frac": 0.996,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Int. WB UR Raw": {
+   "offset": 767,
+   "type": "u16",
+   "scale": 1,
+   "frac": 0.987,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Int. WB HTR Drive": {
+   "offset": 769,
+   "type": "u16",
+   "scale": 1,
+   "frac": 0.987,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Int. WB UA Raw": {
+   "offset": 771,
+   "type": "u16",
+   "scale": 1,
+   "frac": 0.987,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Int. WB Lambda": {
+   "offset": 773,
+   "type": "f32",
+   "scale": 1,
+   "frac": 0.994,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Int. WB HTR P Comp.": {
+   "offset": 781,
+   "type": "f32",
+   "scale": 1,
+   "frac": 0.991,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "Int. WB HTR I Comp.": {
+   "offset": 785,
+   "type": "f32",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "RTC Minutes": {
+   "offset": 799,
+   "type": "u8",
+   "scale": 1,
+   "frac": 1.0,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "RTC Seconds": {
+   "offset": 800,
+   "type": "u16",
+   "scale": 1,
+   "frac": 0.998,
+   "alt_offsets": [],
+   "captures": 1
+  },
+  "EPS Oil Press. Limit": {
+   "offset": 811,
+   "type": "f32",
+   "scale": 1,
+   "frac": 0.987,
+   "alt_offsets": [],
+   "captures": 1
+  }
+ },
+ "unmapped": [
+  "AC Status",
+  "AE Captured Delta",
+  "AE Delta",
+  "AE RPM Clamp Trim",
+  "AE Raw Trim",
+  "AE TPS Delta",
+  "AE TPS Equiv. Load In",
+  "AE TPS Equiv. Load Out",
+  "AE VE Trim",
+  "ALS Status",
+  "Alt. Ctrl. Status",
+  "Alt. I Comp.",
+  "Alt. P Comp.",
+  "Analog Spare 1",
+  "Analog Spare 2",
+  "Analog Spare Raw 1",
+  "Analog Spare Raw 2",
+  "Boost CL GPT Trim",
+  "Boost CL Init Duty",
+  "Boost D Comp.",
+  "Boost Final Duty",
+  "Boost I Comp.",
+  "Boost OL Duty",
+  "Boost P Comp.",
+  "Boost Status",
+  "Boost Target Gear Limit",
+  "Boost Target MAP",
+  "Btn 1 Raw",
+  "Btn 1 Val",
+  "Btn 2 Raw",
+  "Btn 2 Val",
+  "Btn 3 Raw",
+  "Btn 3 Val",
+  "CAM A Sync Status",
+  "CAM B Sync Status",
+  "CAM C Sync Status",
+  "CAM D Sync Status",
+  "CAN CLT Duty",
+  "CAN RXd Count",
+  "CAN Status",
+  "Cam B IRQs",
+  "Clutch SW Status",
+  "DBW A Calc. Pedal Pos.",
+  "DBW A D Comp",
+  "DBW A I Comp",
+  "DBW A P Comp.",
+  "DBW A PWM Duty",
+  "DBW A Pedal Pos Raw 1",
+  "DBW A Pedal Pos Raw 2",
+  "DBW A Pedal Pos. 1",
+  "DBW A Pedal Pos. 2",
+  "DBW A Pedal Pos. Final",
+  "DBW A Sens. Status",
+  "DBW A Status",
+  "DBW A Target TPPS",
+  "DBW A Target TPPS Err.",
+  "DBW A Throttle Pos Raw 1",
+  "DBW A Throttle Pos Raw 2",
+  "DBW A Throttle Pos. 1",
+  "DBW A Throttle Pos. 2",
+  "DBW Duty Batt. Trim",
+  "DBW Friction Comp.",
+  "DBW Spring Comp.",
+  "DL - Entries In Log",
+  "DL - Seconds left in log",
+  "DL - Switch status",
+  "DL Status",
+  "Debug 1",
+  "Debug 2",
+  "Debug 3",
+  "Debug 4",
+  "Dummy",
+  "EG Temp 1",
+  "EGT 1 Status",
+  "EPS EGT Status",
+  "EPS Fuel Press Status",
+  "EPS Lambda Status",
+  "EPS Oil Press Status",
+  "EPS Oil Temp Status",
+  "EPS: Generic Status",
+  "EPS: Override SW Status",
+  "EVAP Status",
+  "Ethanol Content",
+  "Extra Idle Load SW Status",
+  "Flex - ASE Trim",
+  "Flex - Base Ign. Adv",
+  "Flex - Base VE",
+  "Flex - Boost CL Target MAP",
+  "Flex - Boost OL Duty",
+  "Flex - Cranking Trim",
+  "Flex - Idle OL Duty",
+  "Flex - Primming Pulse",
+  "Flex - Target AFR",
+  "Flex Fuel - Base Comp.",
+  "Flex Fuel - Flex Comp.",
+  "Fuel Temperature",
+  "GPT 2D 1 Inp. Link",
+  "GPT 2D 1 Out Link",
+  "GPT 2D 2 Inp. Link",
+  "GPT 2D 2 Out Link",
+  "GPT 2D 3 Inp. Link",
+  "GPT 2D 3 Out Link",
+  "GPT 3D 1 Inp. Link 1",
+  "GPT 3D 1 Inp. Link 2",
+  "GPT 3D 1 Out Link",
+  "GPT 3D 2 Inp. Link 1",
+  "GPT 3D 2 Inp. Link 2",
+  "GPT 3D 2 Out Link",
+  "GPT 3D 3 Inp. Link 1",
+  "GPT 3D 3 Inp. Link 2",
+  "GPT 3D 3 Out Link",
+  "GPT Dash Chan 1",
+  "GPT Data Out 1",
+  "GPT Data Out 2",
+  "GPT PWM 1 Duty",
+  "GPT PWM 2 Duty",
+  "GPT PWM 3 Duty",
+  "GPT PWM 4 Duty",
+  "GPT PWM 5 Duty",
+  "GPT PWM 6 Duty",
+  "GS Cut Dur",
+  "GS Cut Perc.",
+  "GS Ign. Add",
+  "GS Inj Trim",
+  "GS Re-Add Dur",
+  "GS SW Status",
+  "GS Status",
+  "GS Table Ign. Add",
+  "GS Table Inj Trim",
+  "GS: Load Cell Ana Raw",
+  "Idle Batt. V Duty Trim",
+  "Idle D Comp.",
+  "Idle GPT PWM Add.",
+  "Idle I Comp.",
+  "Idle Ign. Adv. Spark Scatter",
+  "Idle P Comp.",
+  "Idle RPM Error",
+  "Idle Status",
+  "Idle Stepper Pos.",
+  "Ign. Adv. AC Add",
+  "Ign. Adv. ALS Add",
+  "Ign. Adv. Add. Base Out.",
+  "Ign. Adv. CLT Add",
+  "Ign. Adv. GPT Add",
+  "Ign. Adv. IAT Add",
+  "Ign. Adv. Knock Add",
+  "Ign. Adv. LC Add",
+  "Ign. Adv. Limiter Add",
+  "Ign. Adv. Sec. Load Trim",
+  "Ign. Adv. Spark Scatter Add",
+  "Ign. Adv. Trailing Spark Delay",
+  "Inj. AC Trim",
+  "Inj. AE VE Added",
+  "Inj. ASE Trim",
+  "Inj. Add Base VE Out.",
+  "Inj. Angle Final",
+  "Inj. Cranking Trim",
+  "Inj. Cyl. Trim 1",
+  "Inj. Cyl. Trim 2",
+  "Inj. Cyl. Trim 3",
+  "Inj. Cyl. Trim 4",
+  "Inj. Cyl. Trim 5",
+  "Inj. Cyl. Trim 6",
+  "Inj. Cyl. Trim 7",
+  "Inj. Cyl. Trim 8",
+  "Inj. IAT Trim",
+  "Inj. INT IAT Trim",
+  "Inj. Idle Trim",
+  "Inj. Knock Trim",
+  "Inj. LC Trim",
+  "Inj. Limiter Trim",
+  "Inj. Max Duty Cnt.",
+  "Inj. Overrun Trim",
+  "Inj. PW GPT Trim",
+  "Inj. Sec. Load Trim",
+  "Injector duty",
+  "Int. WB HTR D Comp.",
+  "Int. WB Heater Status",
+  "Int. WB Sensor Status",
+  "Int. WB Status",
+  "Int. WB Target UR Raw",
+  "Intake Air Temp.",
+  "Knock Acc. Lvl. Raw",
+  "Knock Cyl 1 Ev. Cnt",
+  "Knock Cyl 2 Ev. Cnt",
+  "Knock Cyl 3 Ev. Cnt",
+  "Knock Cyl 4 Ev. Cnt",
+  "Knock Cyl 5 Ev. Cnt",
+  "Knock Cyl 5 Peak",
+  "Knock Cyl 6 Ev. Cnt",
+  "Knock Cyl 6 Peak",
+  "Knock Cyl 7 Ev. Cnt",
+  "Knock Cyl 7 Peak",
+  "Knock Cyl 8 Ev. Cnt",
+  "Knock Cyl 8 Peak",
+  "Knock Events Count",
+  "Knock Lvl. Rel.",
+  "Lambda LTT Conf. Lvl.",
+  "Lambda LTT Status",
+  "Lambda LTT Store Tmr.",
+  "Lambda Status",
+  "Lambda Target AFR GPT Trim",
+  "Lambda WB LTT RT Trim",
+  "Lambda WB LTT Table Trim",
+  "Launch Ctrl. RPM Limit",
+  "Launch Ctrl. Status",
+  "Launch Ctrl. Table Ign. Add",
+  "Launch Ctrl. Table Inj. Trim",
+  "Lim. GPT RPM",
+  "Lim. Ign. Cut Perc.",
+  "Lim. Inj. Cut Perc.",
+  "Lim. Table RPM",
+  "Load Cell Ana",
+  "Lost sync count",
+  "Main - ASE Trim",
+  "Main - Base Ign. Adv",
+  "Main - Base VE",
+  "Main - Boost CL Target MAP",
+  "Main - Boost OL Duty",
+  "Main - Cranking Trim",
+  "Main - Idle OL Duty",
+  "Main - Primming Pulse",
+  "Main - Target AFR",
+  "Master Relay Status",
+  "O2 Val",
+  "Oil Pump FB Perc",
+  "Oil Pump FB Raw",
+  "Oil Pump Pos Cnt.",
+  "Oil Pump Req Pos",
+  "Overrun Status",
+  "Pri. Fan Status",
+  "RTC Day",
+  "RTC Hour",
+  "RTC Month",
+  "RTC Status",
+  "RTC Year",
+  "Sec. Fan Status",
+  "Sec. Inj. Dead Time",
+  "Sec. Inj. Duty",
+  "Sec. Inj. PW",
+  "Sec. Inj. Perc",
+  "Sec. Inj. Start Angle",
+  "Secondary Load",
+  "Sel. Map Boost",
+  "Sel. Map Ign.",
+  "Sel. Map Inj.",
+  "Start. Inj. ASE Decay Time",
+  "Start. Inj. ASE Decay Time Left",
+  "Start. Inj. ASE Trim",
+  "Start. Inj. Crank Trim",
+  "Sw. Boost  CL Target 1",
+  "Sw. Boost  CL Target 2",
+  "Sw. Boost  OL Duty 2",
+  "Sw. Boost OL Duty 1",
+  "Sw. Ign. Adv. Base 1",
+  "Sw. Ign. Adv. Base 2",
+  "Sw. Inj. VE Base 1",
+  "Sw. Inj. VE Base 2",
+  "Sync status",
+  "TPS",
+  "Trigger - Filtered IRQs",
+  "VICS Status",
+  "VSS Calc. Speed",
+  "VSS Gear",
+  "VSS Speed",
+  "VVT A Cam Target Adv.",
+  "VVT A Duty",
+  "VVT A I Comp.",
+  "VVT A P Comp.",
+  "VVT A Status",
+  "VVT B Cam Curr. Adv.",
+  "VVT B Cam Target Adv.",
+  "VVT B Duty",
+  "VVT B I Comp.",
+  "VVT B P Comp.",
+  "VVT B Status",
+  "VVT Table 1 Target Adv.",
+  "VVT Table 2 Target Adv.",
+  "Water Injection Status"
+ ]
+}
