@@ -8,6 +8,7 @@ Start here in a new session, then read `CLAUDE.md` for the rules.
 
 - **In the car:** v12 (`calibrations/mx5_nb_me442_v12.mecal`), burned and driven 2026-10-17.
 - **To load next:** **v16** (`calibrations/mx5_nb_me442_v16.mecal`; run sheet `docs/run-sheet_v15.pdf` still applies). It adds v13/v14 (light-load VE fix, smoothed; see `docs/ve_v12_vs_v14.png`), v15 (richer AFR targets at 100/115 kPa) and v16 (closed-loop authority 20% → 10%). v15 was only started on the stand (2026-10-17 14:58 log), never driven; v16 not yet burned. Rollback: v12.
+- **Oil pressure protection is OFF in the ECU (found 2026-10-17)** although every file since v7 enables it; it has never been active (see findings). Until fixed, watch oil pressure yourself.
 - **Fuel:** tank is still the ~6-month-old 98 with an octane booster added. Plan: run it down off boost, fill with fresh 98, note the date.
 - **Stay off boost** until fresh fuel is in and the wastegate preload and BOV checks are done. Knock control is firing on cyl 3 (and 2) at 2,500–3,600 rpm × 90–130 kPa; some of cyl 3's readings are noise (one event at 46 kPa / 2% TPS).
 - **Chris's to-do list (car, not calibration):** wastegate preload / opening pressure check (aim ~8 psi); BOV bench test, then reconnect its reference line (it is currently removed and capped, after the 2026-10-17 logs); fuel pressure leak-down pinch test; boost leak test; tyre size; which "stronger spring" he has (Forge colour, or the turbo's supplied 8 psi actuator).
@@ -82,7 +83,14 @@ Not changed yet: VE above 64 kPa and all boost VE, AFR targets other than 100/11
 
 ## Findings so far
 
-### 2026-10-17: first v12 drive (44 min)
+### 2026-10-17 evening: v16 burned; ECU settings check
+
+ECU connected (firmware 4.2.1) after Chris burned v16. `tools/meite_check.py check` against v16: 333 of 334 visible driver settings match, including Lambda Authority 10% (only v16 has that), so the ECU holds v16. The exception:
+
+- **EPS: Oil, Oil Pressure "Enabled": ECU No, file Yes.** Oil Temp. "Enabled" is No in both. Offline, with the v16 file open, MEITE showed Oil Pressure Enabled = Yes, so the file loads correctly; the value is lost on the way to (or back from) the ECU.
+- **It has never been active.** `EPS Oil Press Status` is 0 in every log since v7 (v7–v15 all enable it in the file), while `EPS Lambda Status` reads 1 from v3 on (lean protection enabled) and 0 in the Dec 2025 log when all protection was off. So status 1 = armed, and oil pressure protection was never armed.
+- **Likely cause (not proven):** the driver has two settings both named "Enabled" (Oil Temp., then Oil Pressure). If MEITE or the firmware matches settings by name when burning or reading back, the pressure flag takes the temperature flag's value (No). Test: see open items.
+
 
 Logs: `logs/2026-10-17_0834_meite-pc_key-on-leakdown.csv`, `logs/2026-10-17_0837_meite-pc_cold-start-drive.csv`. BOV was connected normally for these logs; Chris removed and capped its reference (vacuum) line **afterwards**, to rule out a boost leak. Caveat for the next logs: with no reference, the BOV can't vent on lift (compressor surge) and, on many designs, is held shut on boost by its spring alone, so it may leak *more*. Bench-test it (10–15 psi on the inlet, reference open; then vacuum on the reference should open it) or blank it off; otherwise reconnect. Fuel: old tank with octane booster (to confirm).
 
@@ -171,6 +179,7 @@ Logs: `logs/2026-07-18_1644_sd_onboard-no3.csv` (259 s, light street driving, ma
 
 ### Calibration
 
+- [ ] **Oil pressure protection not armed in the ECU** (2026-10-17 finding). Test, engine off: in MEITE (connected) set EPS tab → Oil Pressure → Enabled = Yes, burn, power-cycle, reconnect, re-read. (a) Sticks and Oil Temp. Enabled stays No → it was a one-off; log once and confirm `EPS Oil Press Status` = 1. (b) Reverts to No → name-matching bug: report to Motorsport Electronics. (c) Oil Temp. Enabled flips to Yes too → the two flags are shared; then oil temp protection is live with Temp. L Limit 10 °C → 2,000 rpm limit on cold starts, so set Temp. L Limit to −40 °C (and check H 120 °C) in the next version before relying on it. Re-run `meite_check.py check` after any burn
 - [ ] Knock: v8/v11 pulled timing at 2,000–4,000 rpm × 83–111 kPa. Re-check on fresh fuel; the 83 kPa row (24.25–26.75° at 2,500–3,000) still feeds 90–97 kPa. Separate real knock from cyl 3 noise before pulling more (dyno with det cans)
 - [ ] Knock control: gentler retard (smaller step or rotations per step) once timing is safer; it goes to −8° on a single marginal event
 - [ ] Return-to-idle dip: lean on the way down, then closed loop re-engages on stale lean readings and overshoots rich (mechanism in the 2026-10-17 findings). v16 cuts authority to 10%. On the v16 log, check lifts to idle: lowest rpm, AFR in the 2 s after closed loop re-engages. If still dipping, next levers: closed-loop Max MAP Delta (300, units to confirm in the ME442 manual) to hold trim while MAP rises, overrun Min RPM / init delay, then 24–33 kPa × 1,000–1,600 rpm VE
