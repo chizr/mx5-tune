@@ -31,6 +31,7 @@ NB1 MX-5 10th Anniversary (6-speed, no VVT), RHD, ~200,000 km on the car. Built 
 | Boost solenoid | Pierburg 3-port, 30 Hz, on LS1 |
 | Injectors | Bosch EV14 640 cc/min (ME INJ-650 kit), exact Bosch part number unknown |
 | Fuel system | Return system, Radium fuel rail (8AN ORB ports) with a Radium fuel pulse damper on one 8AN port (rail side; it held in the 2026-10-17 feed-clamp test, and its stored volume slightly slows post-shutdown bleed-down). Turbosmart FPR6 regulator: 1:1 boost-referenced bypass type (not rising-rate), set to 300 kPa (~43.5 psi) above manifold (confirmed in logs). Mounted on the firewall end of the rail (end-of-rail): pump → feed → rail → FPR6 → return → tank; fuel enters the FPR6 at its bottom from the rail. Two ports used (inlet from the rail, return to the tank); the spare pressure-side port is plugged (check it for weeping in the leak-down hunt). Pump believed to be DW200 |
+| Ignition | Toyota coil-on-plug (COP) coils with built-in igniters, driven sequentially by the ME442. NGK BKR7E plugs (heat range 7, two steps colder than stock), gap ~0.7 mm (0.028") recommended for boost (forum consensus; 0.6 mm if misfire on boost). Plugs read 2026-10-18: even light brown on all four, no specks or metal flecks |
 | Lambda | Internal Bosch LSU 4.9 wideband |
 | Knock | Single sensor (Digitune, IIRC); ECU splits readings per cylinder by crank window; sensor hears cylinders 2 and 3 loudest |
 | IAT | Intercooler outlet; calibration matches Bosch 2.5 kΩ NTC curve; possibly a slow brass-bodied type |
