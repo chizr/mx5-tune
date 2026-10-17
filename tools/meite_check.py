@@ -16,6 +16,10 @@ CLI:
   meite_check.py check FILE.mecal    compare every visible setting with FILE and check
                                      FILE is the one open; visits each tab that holds a
                                      driver once (from docs/meite_layout.md if present)
+  meite_check.py working FILE.mecal  diff MEITE's working copy of the calibration
+                                     (ProgramData/.../calibs/MEITE_calib.mecal, rewritten
+                                     after it reads or burns the ECU) with FILE, tables
+                                     included; no UI involved
 """
 import math
 import os
@@ -256,7 +260,23 @@ def check(views, path, status):
     return 0 if open_ok and not bad else 1
 
 
+WORKING_CAL = r"C:\ProgramData\Motorsport Electronics Limited\MEITE\calibs\MEITE_calib.mecal"
+
+
+def working(path):
+    """Diff MEITE's working calibration copy (rewritten when it reads or burns the ECU)
+    with FILE. Covers tables as well as settings; needs no UI."""
+    import time as _t
+    st = os.stat(WORKING_CAL)
+    print(f"MEITE working copy: {WORKING_CAL} (written {_t.strftime('%Y-%m-%d %H:%M:%S', _t.localtime(st.st_mtime))})")
+    out = mecal.diff(path, WORKING_CAL)
+    print(out or f"(no differences from {os.path.basename(path)}: all settings and tables match)")
+    return 1 if out else 0
+
+
 def main(argv):
+    if len(argv) >= 3 and argv[1] == "working":
+        return working(argv[2])
     if len(argv) < 2 or argv[1] not in ("map", "check") or (argv[1] == "check" and len(argv) < 3):
         print(__doc__)
         return 1
