@@ -88,7 +88,7 @@ Not changed yet: VE above 64 kPa and all boost VE, AFR targets other than 100/11
 ECU connected (firmware 4.2.1) after Chris burned v16. `tools/meite_check.py check` against v16: 333 of 334 visible driver settings match, including Lambda Authority 10% (only v16 has that), so the ECU holds v16. The exception:
 
 - **EPS: Oil, Oil Pressure "Enabled": ECU No, file Yes.** Oil Temp. "Enabled" is No in both. Offline, with the v16 file open, MEITE showed Oil Pressure Enabled = Yes, so the file loads correctly; the value is lost on the way to (or back from) the ECU.
-- **It has never been active.** `EPS Oil Press Status` is 0 in every log since v7 (v7–v15 all enable it in the file), while `EPS Lambda Status` reads 1 from v3 on (lean protection enabled) and 0 in the Dec 2025 log when all protection was off. So status 1 = armed, and oil pressure protection was never armed.
+- **It has never been active.** `EPS Oil Press Status` is 0 in every log since v7 (v7–v15 all enable it in the file), while `EPS Lambda Status` reads 1 from v3 on (lean protection enabled) and 0 in the Dec 2025 log when all protection was off. So status 1 = armed, and oil pressure protection was never armed. Key-on log with v16 burned (17:44, engine off, 210 s, not committed): `EPS Lambda Status` 1, `EPS Oil Press Status` 0, as before.
 - **Likely cause (not proven):** the driver has two settings both named "Enabled" (Oil Temp., then Oil Pressure). If MEITE or the firmware matches settings by name when burning or reading back, the pressure flag takes the temperature flag's value (No). Test: see open items.
 
 
