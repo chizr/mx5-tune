@@ -237,8 +237,13 @@ def check(views, path, status):
                 else:
                     bad.append(f"{where}: MEITE {v!r}, file {hit[2]!r} ({tab.strip()})")
     stem = re.split(r"[\\/]", path)[-1].rsplit(".", 1)[0]
-    open_ok = stem in status
-    print(f"open in MEITE: {'yes' if open_ok else 'NO'} (looking for {stem!r} in status bar {status})")
+    connected = any(s.startswith("Connected") for s in status)
+    open_ok = connected or stem in status
+    if connected:
+        print(f"connected to the ECU ({[s for s in status if s.startswith('Connected')][0]}): "
+              f"comparing what the ECU holds with {stem}")
+    else:
+        print(f"open in MEITE: {'yes' if open_ok else 'NO'} (looking for {stem!r} in status bar {status})")
     print(f"{ok} settings match, {len(bad)} differ, {len(unknown)} not in file; "
           f"{len(seen)} drivers shown in MEITE's tabs")
     for b in bad:
