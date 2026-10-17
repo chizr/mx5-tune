@@ -24,4 +24,13 @@ python3 tools/logtools.py knock logs/<log>.csv
 git diff v6 v7 -- calibrations/  # readable after setup-git.sh
 ```
 
+Windows, with MEITE open (selects view tabs only; never edits or touches the ECU):
+
+```sh
+.venv\Scripts\python tools\meite_check.py check calibrations\mx5_nb_me442_v16.mecal   # before burning
+.venv\Scripts\python tools\meite_check.py map docs\meite_layout.md calibrations\mx5_nb_me442_v16.mecal
+```
+
+`docs/meite_layout.md` lists which MEITE tab holds each driver and table.
+
 After a session: if you changed the calibration in MEITE, save it as the next `calibrations/mx5_nb_me442_vN.mecal` (never over an existing version), copy logs into `logs/` with the naming convention, update `logs/README.md`, commit.
