@@ -192,7 +192,7 @@ Logs: `logs/2026-07-18_1644_sd_onboard-no3.csv` (259 s, light street driving, ma
 - [ ] **Knock noise on cyl 3:** look for a loose heat shield or exhaust contact near the knock sensor, and injector / valvetrain tick. Of 19 knock events in the 2026-10 drives, ~14 were under steady acceleration (throttle within ±10% over 0.5 s, revs rising): real knock or steady load noise. ~4 were on throttle lift (−18 to −98% in 0.5 s, incl. the 46 kPa one), when the engine rocks on its mounts: check for exhaust / downpipe / heat shield contact on snap lift-off, poly mount bolt torque (factory or bush maker's figure, car on its wheels), and that the knock sensor is torqued and its wire secure. Mounts can't cause real detonation, only impact noise
 - [ ] Record tyre size; confirm the final drive (for gear detection)
 - [x] Which stronger spring is on hand: Forge purple (fitted the evening of 2026-10-16)
-- [ ] After the heat-wrap removal and mount change (2026-10-17): compare cyl 3 light-load knock noise and lift-off knock events with earlier drives; check mount bolt torque
+- [ ] After the heat-wrap removal and mount change (2026-10-17): compare cyl 3 light-load knock noise and lift-off knock events with earlier drives (mount bolts re-torqued to spec)
 - [ ] Optional hardware: pre-turbo (exhaust) pressure and temperature sensors on spare analog inputs; EGT
 
 ### Driving and logging
@@ -240,7 +240,7 @@ Decided: no AC, so AC control stays disabled. Boost targets stay as they are (ma
 - Gears hard to select when stationary: check the floor mat isn't under the clutch pedal (also check full throttle reaches ~100% TPS), then bleed the clutch with fresh fluid. The NB 6-speed's shift turret shares the gearbox oil (no separate turret oil, unlike the 5-speed), so check the gearbox oil level and age. The short-shift kit adds effort but doesn't cause drag.
 - Turbo choice: compared with the old standard TD04, the hybrid makes little boost on part throttle at 2,500–4,000 rpm (98–109 vs 120–132 kPa). Check preload before blaming the turbo.
 - **2026-10-17: downpipe heat wrap removed** (degraded). Loose wrap can buzz or slap and read as knock (cyl 3 is the suspect): compare cyl 3 light-load knock noise (ratio to cyl 1 was 1.15–1.17, see the 2026-10-17 breathing/ring-health table) on the next drive. Expect a little more under-bonnet heat; watch IAT.
-- **2026-10-17: poly engine mount bolts loosened** for less vibration. Keep them at a real torque (bush maker's or factory figure, car on its wheels; nyloc or thread locker if backed off): loose bolts can back out and let the engine rock more on lift-off, which also shows up as knock-sensor noise.
+- **2026-10-17: poly engine mount bolts loosened and re-torqued to spec** (to relieve bush preload, for less vibration). Watch for any change in lift-off knock events, since engine rock shows up as knock-sensor noise.
 - **2026-10-17: BOV** reference line removed and capped after the morning logs; planned short drive with the BOV deleted (port blanked) to see whether boost builds better. Expect compressor surge on lift-off; keep it light on the old fuel. Then bench-test the BOV, reconnect with a short 3–4 mm vacuum hose to the manifold after the throttle, and do the boost leak test.
 
 ## Logging and reference numbers
