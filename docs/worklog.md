@@ -1,6 +1,19 @@
 # MX-5 NB turbo tune — worklog
 
-Last updated 2026-10-07. Calibration to load: `calibrations/mx5_nb_me442_v15.mecal` (tag `v15`), **not yet burned or driven**; includes v13/v14 (v13 superseded before burning). v12 is in the car (burned and driven 2026-10-17; oil now reads ~2 kPa engine-off). v7 was burned and driven 2026-10-07 (Part A of the run sheet plus a 20 min drive; filled-in page 1: `docs/run_sheet_v7.jpg`).
+Last updated 2026-10-17.
+
+## Where things stand (handover)
+
+Start here in a new session, then read `CLAUDE.md` for the rules.
+
+- **In the car:** v12 (`calibrations/mx5_nb_me442_v12.mecal`), burned and driven 2026-10-17.
+- **To load next:** **v15** (`calibrations/mx5_nb_me442_v15.mecal`, run sheet `docs/run-sheet_v15.pdf`). It adds v13/v14 (light-load VE fix, smoothed; see `docs/ve_v12_vs_v14.png`) and v15 (richer AFR targets at 100/115 kPa). Not yet burned or driven. Rollback: v12.
+- **Fuel:** tank is still the ~6-month-old 98 with an octane booster added. Plan: run it down off boost, fill with fresh 98, note the date.
+- **Stay off boost** until fresh fuel is in and the wastegate preload and BOV checks are done. Knock control is firing on cyl 3 (and 2) at 2,500–3,600 rpm × 90–130 kPa; some of cyl 3's readings are noise (one event at 46 kPa / 2% TPS).
+- **Chris's to-do list (car, not calibration):** wastegate preload / opening pressure check (aim ~8 psi); BOV bench test, then reconnect its reference line (it is currently removed and capped, after the 2026-10-17 logs); fuel pressure leak-down pinch test; boost leak test; tyre size; which "stronger spring" he has (Forge colour, or the turbo's supplied 8 psi actuator).
+- **Next calibration work, in order:** (1) check v15 drive logs: cruise trims within ±5%, knock events, idle; (2) fill VE data gaps by normal driving (`docs/ve_coverage.png`); (3) dyno: spring-only boost (C2), duty steps (C3), boost VE and AFR targets, knock with det cans, then boost duty tables and PID; (4) return-to-idle dip; (5) gear detection.
+- **Waiting on Chris:** fuel date once refilled; what happened at ~10:46:17 on 2026-10-07 (knock event at 5,178 rpm in 1st); tyre size.
+- **Tools:** `tools/mecal.py` (edit/diff calibrations), `tools/logtools.py` (summary, lambda, knock, idle), `tools/vetools.py` (VE coverage, per-cell fuel need, smooth fit; v14 was made with it), `tools/make_runsheet.py` (run sheet PDF).
 
 ## Car and hardware
 
@@ -64,7 +77,7 @@ Versions are git tags; from v10 each version is also its own file `calibrations/
 | v2 | Fuel | Dead time voltage axis | 8–16 V, then 16 V repeated | 8, 9, 10, 11, 12, 12.5, 13, 13.25, 13.5, 13.75, 14, 14.25, 14.5, 15, 15.5, 16 V | Finer resolution around alternator voltage |
 | v2 | Fuel | Dead time values | 12 V 1.65, 13 V 1.12 ms (kink) | Smooth curve: 12 V 1.52, 13 V 1.21 ms, in-between values interpolated (log-PCHIP) | Remove 12–13 V step; running voltage barely changed |
 
-Not changed yet: VE table, AFR targets, boost targets, boost duty tables, PID gains, idle spark scatter, fuel pressure protection, oil temperature protection.
+Not changed yet: VE above 64 kPa and all boost VE, AFR targets other than 100/115 kPa, boost targets, boost duty tables, PID gains, knock thresholds and retard rate, fuel pressure protection, oil temperature protection.
 
 ## Findings so far
 
@@ -77,6 +90,7 @@ Logs: `logs/2026-10-17_0834_meite-pc_key-on-leakdown.csv`, `logs/2026-10-17_0837
 - **MAP sensor:** HRT is linear 0 V = 5 kPa to 5 V = 400 kPa (4-bar). Engine off it reads 101.8–102.0 kPa across three logs: plausible barometric pressure. To verify, compare with a nearby weather station's *station* pressure (not sea-level QNH) at the time of a key-on log.
 - **Fuel pressure leak-down confirmed:** 161 → 97 kPa in 20 s, 58 at 60 s, 23 at 194 s. Cold start with 21 kPa at crank took 2.5 s.
 - **Knock: now cylinder 3, and partly off boost.** 6 retard events, cyl 3 14 of 17 counts. Events at 2,750–2,985 rpm × 92–110 kPa (20.7–22.4° at 92–99 kPa: still fed by the 83 kPa row's 24.25–26.75° at 2,500–3,000), one at 1,448 rpm × 86 kPa / 15% TPS, and one at **3,371 rpm × 46 kPa with 2% TPS**, which can't be detonation: cyl 3's window is picking up noise. Ratios on boost: cyl 3 1.35–1.69×, cyl 2 1.33–1.50×, cyl 1/4 1.1–1.2×. Real knock and noise are now mixed; det cans on a dyno are the way to separate them. Possible cyl 3 noise sources: loose heat shield or exhaust contact near the sensor, injector or valvetrain tick (stiffer springs).
+- **Knock across all logs since knock control went on (21 events):** 8 at 2,500–3,000 rpm and 7 at 3,000–3,600 rpm, at 90–130 kPa. Only two below 2,500 rpm under load (2,211 rpm × 92 kPa on 2026-10-07; 1,448 rpm × 86 kPa on 2026-10-17), both cyl 3. At 1,200–2,000 rpm × 90–110 kPa cyl 3 rises 1.39–1.44× vs 1.14–1.36× for the others, so mostly load noise, but only 1–3 s of logged time there: not proof of safety.
 - **Light-load VE hole, confirmed.** Warm, closed-loop trim sat at its +20% limit 16% of the time, nearly all in light cruise (0.5–15% TPS, 33–42 kPa, 1,800–3,200 rpm), where AFR still read 15.4–16.8. From steady closed-loop samples in both warm drives (trim × measured AFR ÷ target), the base VE needs ×1.15–1.39 at 24–43 kPa × 1,550–3,400 rpm (worst 33 kPa × 2,250 rpm, ×1.39, 1,197 samples), ×1.05–1.08 at 53 kPa, ~×1.0 from 64 kPa up. The 2,250 rpm column is 20–30% below its neighbours at 24–43 kPa.
 - **Acceleration fuelling is adequate.** 19 tip-ins from steady fuelled running: median lean blip only +0.5 AFR over target in the first 0.5 s (above +1.5 in 20–30%), then a rich trough of −1.2 to −2.3 AFR. The big lean readings on tip-in are from coming straight out of overrun fuel cut (exhaust still lean at the sensor) or from the lean cruise cells above. On boost AFR 11.7–12.4 vs 12.4–12.9 target: slightly richer than target.
 - **Boost:** still short bursts (longest 2.1 s above 105 kPa; only 26 samples at 90%+ TPS). Peak 123 kPa in 2nd at 60% TPS. BOV was still connected here.
@@ -134,46 +148,58 @@ Logs: `logs/2026-07-18_1644_sd_onboard-no3.csv` (259 s, light street driving, ma
 
 ## Open items
 
-**Fixed 2026-10-07 (Chris re-plumbed the solenoid; C2/C3 will confirm on the road).** Original note: **boost solenoid plumbed backwards (confirmed).** Bench test: with the solenoid unpowered, the boost supply port is blocked and the actuator port connects to the vent, so the actuator sees no pressure at 0% duty (below 105 kPa, or if the solenoid loses power) and the wastegate stays shut until the 225 kPa over-boost cut. Above 105 kPa the 65–80% duty then feeds boost *to* the actuator, which fits the 115–117 kPa ceiling. Stay off boost and do not run B4 until it is re-plumbed so unpowered = supply connected to actuator. Don't fix it with `PWM Solenoid Control` = Inverted: that keeps the unsafe failure mode.
+### Car checks (Chris)
 
-Next: work through `docs/run-sheet_v15.pdf` (leak test, burn v15, off-boost drives on the old fuel, then fresh-fuel boost and knock runs).
+- [ ] **Wastegate preload / opening pressure** (engine cold, off). The turbo has a small 0.41 A/R housing and the vendor claims standard TD04 spool, so turbo size alone shouldn't cost 20–30 kPa at part throttle; its 11% larger wastegate port gives exhaust pressure more area to push the flap open against the light green spring (opens ~5 psi vs the vendor's 8 psi actuator). Check rod preload against the closed flap (per Forge's instructions), opening pressure with a hand pump (aim ~8 psi), and that the flap seats and the arm moves freely. Re-check spring-only boost (C2) after any change
+- [ ] **BOV:** reference line currently removed and capped. Bench-test (holds 10–15 psi on the inlet with the reference open; opens on vacuum), then reconnect. Don't drive long with it removed (surge on lift)
+- [ ] **Fuel pressure leak-down** (161 → 23 kPa in 195 s): after shutdown, watch fuel pressure in MEITE while pinching the return line (holds → regulator) or the feed between pump and rail (holds → pump check valve); neither → injector. Workaround: key on, wait for the pump to stop, crank straight away
+- [ ] **Boost leak test:** cap the turbo inlet, pressurise the intake to ~1 bar, listen / soapy water
+- [ ] **Knock noise on cyl 3:** look for a loose heat shield or exhaust contact near the knock sensor, and injector / valvetrain tick
+- [ ] Record tyre size; confirm the final drive (for gear detection)
+- [ ] Which stronger spring is on hand (Forge colour, or the turbo's supplied 8 psi actuator)?
+- [ ] Optional hardware: pre-turbo (exhaust) pressure and temperature sensors on spare analog inputs; EGT
 
-- [x] **Re-plumb boost solenoid** (done 2026-10-07). Unpowered: actuator ↔ vent, supply blocked (confirmed). Check 12 V pairing; if supply ↔ actuator, swap the supply and vent hoses. Re-test: unpowered supply → actuator; 12 V actuator → vent. Required before any boost running or B4
-- [ ] After re-plumbing, boost duty will hold the gate shut for the first time on this turbo (PID untuned, no initial duty table, 65% step at 105 kPa). v9 sets the over-boost cut to 190 kPa for B4/B5; reset it once duty tables are done
-- [ ] Boost leak test (cap turbo inlet, pressurise intake to ~1 bar) before B4, if not done since the hybrid went on
-- [x] Burn v7 (2026-10-07)
-- [x] Idle valve duty sweep (2026-10-07): ~21.5% for 1,000 rpm warm, fan off
-- [x] Power steering idle-up works; confirmed in log 2026-10-07
-- [ ] Idle voltage test for dead times: retry with lower idle rpm or more load so voltage actually drops
-- [x] IAT responds (2026-10-07); sensor type still unknown (silver body)
-- [x] Idle spark scatter set and working (2026-10-07)
-- [x] Overrun / return-to-idle log with v7 (2026-10-07): still dips, see findings
-- [ ] **Knock at 3,000–3,500 rpm × 98–114 kPa (2026-10-16): no more boost runs until v12 is in and the tank is fresh 98** (octane booster added to the old fuel; run it down). v11 pulls the timing there
-- [ ] Wastegate preload check (engine cold/off) — higher priority now: the turbo's small 0.41 A/R housing and the vendor's "standard TD04 spool" claim mean turbo size alone shouldn't cost 20–30 kPa at part throttle, and its 11% larger wastegate port gives exhaust pressure more area to push the flap open against the light green spring (opens ~5 psi vs the vendor's 8 psi actuator). Aim for opening pressure near 8 psi with preload, or try the supplied 8 psi actuator if available. Check: rod preload against the closed flap (per Forge instructions), opening pressure with a hand pump (green should start moving ~5 psi / 0.35 bar), flap seats fully and the arm moves freely. Low preload would let exhaust pressure crack the flap at part throttle and slow spool; ECU logs can't separate this from turbo size. Re-check C2 spring-only boost after any adjustment
-- [ ] BOV: bench-test (holds 10–15 psi on the inlet with reference open; opens on vacuum) or blank off for a test; don't drive long with the reference line removed (surge on lift)
-- [ ] Fill VE data gaps (2026-10-17 coverage, `docs/ve_coverage.png`; aim ≥20 s steady per cell): 3,400–4,300 rpm at any load (e.g. 3rd at ~60–75 km/h, steady); 64–100 kPa at 1,850–3,400 rpm (steady moderate throttle, hills in 4th/5th); 1,250–1,550 rpm at 43–53 kPa. Nothing steady above 115 kPa or 3,800 rpm: dyno. Don't lug: keep under ~60 kPa below 1,500 rpm
-- [ ] AFR targets on boost: after the boost VE is corrected on the dyno (actual = target), move to ~11.5–11.8 from ~140 kPa and ~11.0 near peak (rule-of-thumb for stock pistons; confirm with EGT/det cans). Closed loop stays off above 105 kPa
-- [ ] Fuel pressure leak-down: after shutdown, watch fuel pressure in MEITE while pinching the return line (holds → regulator) or the feed between pump and rail (holds → pump check valve); neither → injector. Workaround: key on, wait for the pump to stop, crank straight away
-- [x] Oil pressure HRT fixed and oil limits re-based in true kPa (v12). After burning: engine-off oil should read ~0
-- [ ] Idle: v11 sets 22.0% (was 947 rpm at 21.5%). Hot restart still idles ~810 rpm for 20–30 s; look at an after-start idle adder if it persists
-- [ ] Knock: v8 pulls 2° at 2,000–3,000 rpm × 83–97 kPa. Re-log on fresh fuel: expect fewer or no retard events, and cyl 3 ratio on boost nearer 1.1–1.2×
-- [ ] Boost: hybrid tops out at 115–117 kPa in both logs (Jul, Oct), only 2–4 s above 105 kPa; old TD04 (Dec) made 123–132 kPa at 2,500–3,500 rpm on similar part throttle, at 90% duty. Part is the bigger compressor and short bursts, but a ceiling suggests: light green spring cracking early, the 80% `PWM Max Duty` cap (was 90% in Dec), or solenoid plumbed backwards. B4 (0% duty, 3rd, full throttle) gives the spring-only ceiling; B5 duty steps show which way duty moves boost. Green spring rating (Forge): opens ~135 kPa abs, runs ~170 kPa abs, so it can't explain a 115–117 kPa ceiling even with the backwards plumbing. More likely the low boost is mostly short part-throttle bursts plus the bigger compressor. Keep the green spring: its spring-only boost already sits inside the 150–190 kPa targets, and a stronger one would raise the floor and the failure-mode boost above what stock pistons should see
-- [ ] Return-to-idle dip: lean spike (17–24 AFR) as fuel returns after a blip, then CL overshoot. Look at overrun re-entry fuel and closed-throttle fuelling (separate change)
-- [ ] Knock control: consider gentler retard (smaller step or rotations per step) once timing is safer
-- [ ] Road: solenoid unplugged test (spring pressure only)
-- [ ] Road: open loop boost duty steps in 3rd, over-boost cut ~20 kPa above expected
-- [x] Logs vs rebuild: both after (Chris, 2026-10-04)
-- [x] Jul 2026 log was on the hybrid with the Forge actuator (Chris, 2026-10-04)
-- [ ] Fix gear detection: record tyre size and confirm the final drive, then check `VSS Calc. Speed` against GPS speed and correct the VSS/final drive settings
-- [ ] Fill boost CL initial duty table from duty-step logs; enable "use initial duty table"; revisit PID
-- [ ] Light-load VE corrected in v13, smoothed in v14. After burning: closed-loop trim at 24–53 kPa × 1,500–3,400 rpm should sit within ±5% and rarely hit +20%. Then check the 3,800 rpm column at 33/43 kPa (40.1/49.9, well below 3,400 rpm's 53.3/62.8), which had too little data
-- [ ] Extend top VE row 205 → ~230 kPa before raising boost targets
-- [ ] Ask Motorsport Electronics for the INJ-650 dead time table; read injector part number if visible
+### Driving and logging
+
+- [ ] Burn v15; log every drive (all channels, 10 Hz, per-cylinder knock on). Check: cruise trim at 24–53 kPa × 1,500–3,400 rpm within ±5% and rarely at +20%; warm idle ~1,000 rpm; engine-off oil ~0
+- [ ] Run the old fuel down off boost, then fresh 98 (note the date). No boost runs before then
+- [ ] Fill VE data gaps (`docs/ve_coverage.png`, `tools/vetools.py coverage`; aim ≥20 s steady per cell): 3,400–4,300 rpm at any load (e.g. 3rd at ~60–75 km/h); 64–100 kPa at 1,850–3,400 rpm (steady moderate throttle, hills in 4th/5th); 1,250–1,550 rpm at 43–53 kPa. Don't lug: keep under ~60 kPa below 1,500 rpm
+- [ ] Then refit VE with `tools/vetools.py fit` (base = the calibration in the car when the logs were made; `--into` the latest version). Check the 3,800 rpm column and 64–100 kPa first
+
+### Calibration
+
+- [ ] Knock: v8/v11 pulled timing at 2,000–4,000 rpm × 83–111 kPa. Re-check on fresh fuel; the 83 kPa row (24.25–26.75° at 2,500–3,000) still feeds 90–97 kPa. Separate real knock from cyl 3 noise before pulling more (dyno with det cans)
+- [ ] Knock control: gentler retard (smaller step or rotations per step) once timing is safer; it goes to −8° on a single marginal event
+- [ ] Return-to-idle dip: lean spike (17–24 AFR) as fuel returns after a blip, then CL overshoot. Look at overrun re-entry fuel and closed-throttle fuelling
+- [ ] Hot restart idles ~810 rpm for 20–30 s: consider an after-start idle adder
+- [ ] Gear detection reads 3rd as 2nd and 4th as 3rd: fix VSS / final drive settings once tyre size is known (the 185 kPa 1st/2nd boost limit currently applies in 3rd too)
+- [ ] Over-boost cut is a temporary 190 kPa (v9), equal to the peak target; reset after the duty tables are done. PWM max duty 80% until C3 shows what duty gives the peak target
+- [ ] Extend the top VE row 205 → ~230 kPa before any targets above ~200 kPa
+- [ ] Idle voltage test for low-voltage dead times (needs voltage to actually drop)
+- [ ] Ask Motorsport Electronics for the INJ-650 dead time table; read the injector part number if visible
 - [ ] ME442 manual: does fuel pressure protection compare fuel − MAP? What does "CL Req. Boost Delta" do?
-- [ ] Optional hardware: pre-turbo pressure and temperature sensors on spare analog inputs
-- [ ] Dyno: det cans at 2,000–4,000 rpm on boost; knock threshold calibration; final timing
 
-Decided: no AC, so AC control stays disabled. Boost targets stay as they are (max 190 kPa) until the duty tables are done. Do knock and boost runs on fresh fuel only; note fuel age on every log.
+### Dyno session (load-bearing dyno; road speed limits make sustained pulls impractical)
+
+- [ ] Spring-only boost at 0% duty (C2) and manual duty steps (C3): more duty must give more boost
+- [ ] Boost VE so actual AFR = target, then boost AFR targets ~11.5–11.8 from ~140 kPa and ~11.0 near peak (rule of thumb for stock pistons; confirm with EGT / det cans). Closed loop stays off above 105 kPa
+- [ ] Knock with det cans at 2,000–4,000 rpm on boost; set knock thresholds; final timing
+- [ ] Boost CL initial duty table from the duty steps; enable "use initial duty table"; tune PID; then raise the over-boost cut to ~20 kPa above peak target
+
+### Done
+
+- [x] Boost solenoid re-plumbed (2026-10-07): it was backwards (unpowered = actuator vented). Now unpowered = supply → actuator (spring pressure), powered = actuator vented
+- [x] Oil pressure HRT fixed and oil limits re-based in true kPa (v12); confirmed ~2 kPa engine-off
+- [x] Light-load VE hole fixed (v13) and smoothed (v14)
+- [x] Idle duty sweep, PS idle-up, idle spark scatter, IAT response (2026-10-07)
+- [x] Logs vs rebuild (both after); July log on the hybrid with the Forge actuator
+
+Decided: no AC, so AC control stays disabled. Boost targets stay as they are (max 190 kPa) until the duty tables are done. Do knock and boost runs on fresh fuel only; note fuel age on every log. Closed loop stays off on boost (CL max 105 kPa). Keep the green spring until the preload check says otherwise. New calibration versions are new `_vN` files; never edit an existing version's file.
+
+### Other car notes (not calibration)
+
+- Gears hard to select when stationary: check the floor mat isn't under the clutch pedal (also check full throttle reaches ~100% TPS), then bleed the clutch with fresh fluid. The NB 6-speed's shift turret shares the gearbox oil (no separate turret oil, unlike the 5-speed), so check the gearbox oil level and age. The short-shift kit adds effort but doesn't cause drag.
+- Turbo choice: compared with the old standard TD04, the hybrid makes little boost on part throttle at 2,500–4,000 rpm (98–109 vs 120–132 kPa). Check preload before blaming the turbo.
 
 ## Logging and reference numbers
 
@@ -181,9 +207,9 @@ Log everything the December log had, at 10 Hz, including per-cylinder knock (off
 
 | Reference | Value |
 | --- | --- |
-| Warm idle MAP | 29–32 kPa |
+| Warm idle MAP | 29–34 kPa (~32 typical, ~20.7 inHg vacuum) |
 | Closed-throttle decel MAP | 17–25 kPa |
-| Warm idle (July) | ~1,214 rpm at 27.1% duty (fan on) |
+| Warm idle (v12, 2026-10-17) | 996 rpm at 22.0% fan off; ~990–1,030 at 24% fan on |
 | Knock noise floor, loudest cylinder (clean, 35–90 kPa) | ~250–300 below 3,000 rpm; ~370 at 4,000–4,500 |
 | Hot oil pressure (true gauge, from v12) | median ~167 kPa at idle (p5 143); ~292 @1,800–2,500; ~320 @2,500–3,200; ~365 @4,200–5,500 rpm. Logs before v12 read 1.125×true+~110 high |
 | Fuel pressure | 300 kPa above MAP |
@@ -191,3 +217,6 @@ Log everything the December log had, at 10 Hz, including per-cylinder knock (off
 | Injector headroom | 640 cc × 4 at 85% duty ≈ 330–350 crank hp |
 | Boost targets (table 1) | 150 kPa below 2,500 rpm; peak 190 kPa at 4,000–5,000 rpm; 170 kPa from 6,500 rpm |
 | Rev limit | 7,400 rpm warm; 5,000 rpm at 115 °C coolant |
+| Engine-off MAP (barometric) | 101.8–102.0 kPa |
+| Fuel pressure leak-down (engine off) | 161 → 97 kPa in 20 s, 58 at 60 s, 23 at 194 s (should hold for minutes) |
+| Spring-only boost (expected, green Forge spring) | opens ~135 kPa, runs ~170 kPa (Forge rating; not yet measured) |
