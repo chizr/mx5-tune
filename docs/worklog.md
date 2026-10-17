@@ -1,6 +1,6 @@
 # MX-5 NB turbo tune — worklog
 
-Last updated 2026-10-07. Calibration to load: `calibrations/mx5_nb_me442_v14.mecal` (tag `v14`), **not yet burned or driven** (v13 superseded before burning). v12 is in the car (burned and driven 2026-10-17; oil now reads ~2 kPa engine-off). v7 was burned and driven 2026-10-07 (Part A of the run sheet plus a 20 min drive; filled-in page 1: `docs/run_sheet_v7.jpg`).
+Last updated 2026-10-07. Calibration to load: `calibrations/mx5_nb_me442_v15.mecal` (tag `v15`), **not yet burned or driven**; includes v13/v14 (v13 superseded before burning). v12 is in the car (burned and driven 2026-10-17; oil now reads ~2 kPa engine-off). v7 was burned and driven 2026-10-07 (Part A of the run sheet plus a 20 min drive; filled-in page 1: `docs/run_sheet_v7.jpg`).
 
 ## Car and hardware
 
@@ -32,6 +32,7 @@ Versions are git tags; from v10 each version is also its own file `calibrations/
 
 | Tag | Area | Setting | Before | After | Why |
 | --- | --- | --- | --- | --- | --- |
+| v15 | Fuel | Inj. Target AFR, 100 and 115 kPa rows (all rpm) | 100: 13.0–12.7; 115: 12.5–12.4 | 100: 12.5; 115: 12.2 | Knock zone (2,750–3,500 rpm × 92–115 kPa) is the on/off-boost transition. 100 kPa is still closed loop (max 105), so actual AFR follows the target there; at 115 kPa (open loop) fuel rises ~2–3%. Boost logs already run ~0.5 AFR richer than target, so the full boost targets wait for a dyno VE pass |
 | v14 | Fuel | Inj. Base VE (1), 24–64 kPa × 1,250–3,800 rpm (35 cells) | v13 per-cell values (or v12) | Smooth least-squares fit to 14,231 steady closed-loop samples (2026-10-16/17), using the ECU's bilinear interpolation weights plus a curvature penalty; then +2% on 24–53 kPa (prefer rich). v12→v14: up to +63% at 33 kPa × 2,250 rpm, ~0% from 64 kPa | v13 matched the data cell-by-cell but stayed lumpy. Predicted light-cruise fuel error: v12 −18.5%, v13 −0.9%, v14 +0.8% (10–90%: −8..+11%). Also fills the 3,800 rpm dip. Plot: `docs/ve_v12_vs_v14.png` |
 | v13 | Fuel | Inj. Base VE (1), 24–53 kPa × 1,250–3,400 rpm (18 cells) | e.g. 33 kPa: 48.71, 47.36, 32.65, 41.79, 41.64 (1,550–3,400 rpm) | ×1.05–1.39 per cell, e.g. 33 kPa: 56.99, 60.62, 45.38, 53.91, 53.30 | Closed loop at its +20% limit 16% of warm time in light cruise, still lean (15.4–16.8 AFR). Factors = trim × measured AFR ÷ target from steady closed-loop data, 2026-10-16/17. 53 kPa × 3,400 rpm (no data) set ×1.07 to match its row and keep VE rising with load |
 | v12 | Sensors | Oil Press. HRT first point | 0 V → 0 kPa | 0.5 V → 0 kPa | Matches the sensor doc (0.5 V = 0, 4.5 V = 1,000 kPa). Engine-off oil read 113 kPa; oil pressure now logs true gauge kPa (true ≈ 1.125 × old − 125) |
@@ -135,7 +136,7 @@ Logs: `logs/2026-07-18_1644_sd_onboard-no3.csv` (259 s, light street driving, ma
 
 **Fixed 2026-10-07 (Chris re-plumbed the solenoid; C2/C3 will confirm on the road).** Original note: **boost solenoid plumbed backwards (confirmed).** Bench test: with the solenoid unpowered, the boost supply port is blocked and the actuator port connects to the vent, so the actuator sees no pressure at 0% duty (below 105 kPa, or if the solenoid loses power) and the wastegate stays shut until the 225 kPa over-boost cut. Above 105 kPa the 65–80% duty then feeds boost *to* the actuator, which fits the 115–117 kPa ceiling. Stay off boost and do not run B4 until it is re-plumbed so unpowered = supply connected to actuator. Don't fix it with `PWM Solenoid Control` = Inverted: that keeps the unsafe failure mode.
 
-Next: work through `docs/run-sheet_v14.pdf` (leak test, burn v14, off-boost drives on the old fuel, then fresh-fuel boost and knock runs).
+Next: work through `docs/run-sheet_v15.pdf` (leak test, burn v15, off-boost drives on the old fuel, then fresh-fuel boost and knock runs).
 
 - [x] **Re-plumb boost solenoid** (done 2026-10-07). Unpowered: actuator ↔ vent, supply blocked (confirmed). Check 12 V pairing; if supply ↔ actuator, swap the supply and vent hoses. Re-test: unpowered supply → actuator; 12 V actuator → vent. Required before any boost running or B4
 - [ ] After re-plumbing, boost duty will hold the gate shut for the first time on this turbo (PID untuned, no initial duty table, 65% step at 105 kPa). v9 sets the over-boost cut to 190 kPa for B4/B5; reset it once duty tables are done
@@ -150,6 +151,7 @@ Next: work through `docs/run-sheet_v14.pdf` (leak test, burn v14, off-boost driv
 - [ ] **Knock at 3,000–3,500 rpm × 98–114 kPa (2026-10-16): no more boost runs until v12 is in and the tank is fresh 98** (octane booster added to the old fuel; run it down). v11 pulls the timing there
 - [ ] Wastegate preload check (engine cold/off) — higher priority now: the turbo's small 0.41 A/R housing and the vendor's "standard TD04 spool" claim mean turbo size alone shouldn't cost 20–30 kPa at part throttle, and its 11% larger wastegate port gives exhaust pressure more area to push the flap open against the light green spring (opens ~5 psi vs the vendor's 8 psi actuator). Aim for opening pressure near 8 psi with preload, or try the supplied 8 psi actuator if available. Check: rod preload against the closed flap (per Forge instructions), opening pressure with a hand pump (green should start moving ~5 psi / 0.35 bar), flap seats fully and the arm moves freely. Low preload would let exhaust pressure crack the flap at part throttle and slow spool; ECU logs can't separate this from turbo size. Re-check C2 spring-only boost after any adjustment
 - [ ] BOV: bench-test (holds 10–15 psi on the inlet with reference open; opens on vacuum) or blank off for a test; don't drive long with the reference line removed (surge on lift)
+- [ ] AFR targets on boost: after the boost VE is corrected on the dyno (actual = target), move to ~11.5–11.8 from ~140 kPa and ~11.0 near peak (rule-of-thumb for stock pistons; confirm with EGT/det cans). Closed loop stays off above 105 kPa
 - [ ] Fuel pressure leak-down: after shutdown, watch fuel pressure in MEITE while pinching the return line (holds → regulator) or the feed between pump and rail (holds → pump check valve); neither → injector. Workaround: key on, wait for the pump to stop, crank straight away
 - [x] Oil pressure HRT fixed and oil limits re-based in true kPa (v12). After burning: engine-off oil should read ~0
 - [ ] Idle: v11 sets 22.0% (was 947 rpm at 21.5%). Hot restart still idles ~810 rpm for 20–30 s; look at an after-start idle adder if it persists
