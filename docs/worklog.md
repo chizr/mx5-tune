@@ -85,7 +85,22 @@ Not changed yet: VE above 64 kPa and all boost VE, AFR targets other than 100/11
 
 ### 2026-10-17 evening: crankcase breathing baseline
 
-Engine warm-ish at idle (~1,180 rpm), oil cap off: steady rhythmic air pulses and some oil flung out of the filler (cam spray; the filler sits over the cam). Glove over the filler inflates a bit and flutters. Breathing: no PCV, both cam-cover outlets to a vented catch can, so the crankcase sits slightly above atmospheric. Engine ~500 km since the hone. At ~2,500 rpm the glove inflates, but limply; no visible vapour or smoke. The two cam-cover outlets to the can stay open during this, so the glove only sees part of the flow. Read as normal-to-mild blow-by while the rings bed in (excessive would inflate the glove taut or blow it off, usually with vapour and a steady rush). Catch-can volume over distance not yet recorded. Repeat after boost sessions: worse breathing, especially with cyl 2/3 higher on a leak-down, is the early sign of ring-land damage on stock pistons.
+Engine warm-ish at idle (~1,180 rpm), oil cap off: steady rhythmic air pulses and some oil flung out of the filler (cam spray; the filler sits over the cam). Glove over the filler inflates a bit and flutters. Breathing: no PCV, both cam-cover outlets to a vented catch can, so the crankcase sits slightly above atmospheric. Engine ~500 km since the hone. At ~2,500 rpm the glove inflates, but limply; no visible vapour or smoke. The two cam-cover outlets to the can stay open during this, so the glove only sees part of the flow. Read as normal-to-mild blow-by while the rings bed in (excessive would inflate the glove taut or blow it off, usually with vapour and a steady rush). Catch-can volume over distance not yet recorded. The glove reads crankcase pressure (low, which is good for seals and the turbo drain), not total blow-by, since the can outlets carry an unknown share; a few seconds at idle with both outlets blocked would show total flow.
+
+Indirect log checks for a weak cylinder (all warm logs since the rebuild; no crankcase pressure or per-cylinder compression data exists):
+
+| Log | Warm idle rpm | rpm sd | MAP kPa | MAP sd | AFR sd | Idle duty % | Knock noise p50, cyl 2 / 3 / 4 vs cyl 1 (35–60 kPa, 1,500–3,000 rpm) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 2025-12-08 (old turbo) | 1,122 | 10.5 | 29.8 | 0.65 | 0.12 | 22.0 | 1.00 / 1.06 / 0.96 |
+| 2026-10-07 | 1,004–1,043 | 6–10 | 31.3–31.5 | 0.62–0.63 | 0.04–0.06 | 22.5 | 1.00 / 1.12 / 0.98 |
+| 2026-10-16 | 950 | 10.8 | 32.7 | 0.69 | 0.06 | 21.5 | 1.06 / 1.17 / 1.00 |
+| 2026-10-17 | 996 | 8.0 | 31.9 | 0.63 | 0.05 | 22.0 | 1.04 / 1.15 / 1.00 |
+
+- **Idle: no sign of a weak cylinder.** Vacuum, rpm and AFR steadiness and the duty needed for ~1,000 rpm are unchanged; idle MAP differences follow idle rpm. A low-compression or misfiring cylinder would raise and unsettle MAP and make AFR jitter.
+- **Knock noise: cyl 3 has crept up slightly** against cyl 1 (1.06 → 1.15–1.17 of cyl 1 at light load; cyl 2 1.00 → ~1.05). That is 8–16 counts, close to the channel's resolution, and timing, turbo and temperatures differ between logs. Fits the cyl 3 noise already suspected (heat shield / exhaust contact / mounts), or piston slap. Not evidence of ring damage on its own; keep tracking it, and the leak-down settles it.
+- Logs at 10 Hz can't see individual combustion events, so a cylinder-level misfire or compression check isn't possible from them.
+
+Repeat after boost sessions: worse breathing, especially with cyl 2/3 higher on a leak-down, is the early sign of ring-land damage on stock pistons.
 
 ### 2026-10-17 evening: v16 burned; ECU settings check
 
