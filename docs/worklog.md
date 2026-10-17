@@ -154,7 +154,7 @@ Logs: `logs/2026-07-18_1644_sd_onboard-no3.csv` (259 s, light street driving, ma
 - [ ] **BOV:** reference line currently removed and capped. Bench-test (holds 10–15 psi on the inlet with the reference open; opens on vacuum), then reconnect. Don't drive long with it removed (surge on lift)
 - [ ] **Fuel pressure leak-down** (161 → 23 kPa in 195 s): after shutdown, watch fuel pressure in MEITE while pinching the return line (holds → regulator) or the feed between pump and rail (holds → pump check valve); neither → injector. Workaround: key on, wait for the pump to stop, crank straight away
 - [ ] **Boost leak test:** cap the turbo inlet, pressurise the intake to ~1 bar, listen / soapy water
-- [ ] **Knock noise on cyl 3:** look for a loose heat shield or exhaust contact near the knock sensor, and injector / valvetrain tick
+- [ ] **Knock noise on cyl 3:** look for a loose heat shield or exhaust contact near the knock sensor, and injector / valvetrain tick. Of 19 knock events in the 2026-10 drives, ~14 were under steady acceleration (throttle within ±10% over 0.5 s, revs rising): real knock or steady load noise. ~4 were on throttle lift (−18 to −98% in 0.5 s, incl. the 46 kPa one), when the engine rocks on its mounts: check for exhaust / downpipe / heat shield contact on snap lift-off, poly mount bolt torque (factory or bush maker's figure, car on its wheels), and that the knock sensor is torqued and its wire secure. Mounts can't cause real detonation, only impact noise
 - [ ] Record tyre size; confirm the final drive (for gear detection)
 - [ ] Which stronger spring is on hand (Forge colour, or the turbo's supplied 8 psi actuator)?
 - [ ] Optional hardware: pre-turbo (exhaust) pressure and temperature sensors on spare analog inputs; EGT
