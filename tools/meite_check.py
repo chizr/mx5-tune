@@ -13,8 +13,9 @@ CLI:
                                      walk every tab, write where each driver and
                                      table lives (default docs/meite_layout.md);
                                      with FILE, also list what is on no tab
-  meite_check.py check FILE.mecal    walk every tab, compare every visible setting
-                                     with FILE and check FILE is the one open
+  meite_check.py check FILE.mecal    compare every visible setting with FILE and check
+                                     FILE is the one open; visits each tab that holds a
+                                     driver once (from docs/meite_layout.md if present)
 """
 import math
 import os
@@ -104,13 +105,28 @@ def read_view(w):
     return widgets
 
 
-def walk(w):
-    """Visit every tab, return {tab: widgets}, and go back to the starting tab."""
+def driver_tabs(layout="docs/meite_layout.md"):
+    """From a map file: the fewest tabs (first listed per driver) that show every driver."""
+    if not os.path.exists(layout):
+        return None
+    need = set()
+    for line in open(layout, encoding="utf-8"):
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if len(cells) == 3 and cells[1] == "driver":
+            need.add(cells[2].split(", ")[0])
+    return need
+
+
+def walk(w, only=None):
+    """Visit every tab (or just those in `only`), return {tab: widgets}, then go back
+    to the starting tab."""
     tb = tabs(w)
     start = active_tab(tb)
     views = {}
     try:
         for name in tb:
+            if only is not None and name.strip() not in only:
+                continue
             goto(tb, name)
             views[name] = read_view(w)
     finally:
@@ -181,7 +197,29 @@ def _same(ui, fv):
         return False
 
 
+def file_settings(path):
+    """{driver: [(section, label as MEITE shows it, value)]}. MEITE appends the first
+    measurement unit to the name ('MAP Min' -> 'MAP Min(KPa)') and groups by SectionName."""
+    out = {}
+    for d in mecal.drivers(mecal._root(path)):
+        rows = out.setdefault(d.findtext("name"), [])
+        for p in d.find("configParams"):
+            mu = p.find("MeasurementUnitTypes")
+            units = [u.tag for u in mu] if mu is not None else []
+            label = p.findtext("name") + (f"({units[0]})" if units else "")
+            rows.append((p.findtext("SectionName") or "", label, mecal._param_value(p)))
+    return out
+
+
+def _lookup(rows, category, name):
+    hits = [r for r in rows if r[1] == name]
+    if len(hits) > 1:  # repeated name, e.g. 'Enabled' under Oil Temp. and Oil Pressure
+        hits = [r for r in hits if r[0] == category] or hits
+    return hits[0] if len(hits) == 1 else None
+
+
 def check(views, path, status):
+    F = file_settings(path)
     D = mecal.flatten(path)
     seen, ok, bad, unknown = set(), 0, [], []
     for tab, ws in views.items():
@@ -189,16 +227,15 @@ def check(views, path, status):
             if wd["kind"] != "driver" or wd["name"] in seen:
                 continue
             seen.add(wd["name"])
-            count = {}
-            for _, n, v in wd["settings"]:
-                count[n] = count.get(n, 0) + 1
-                key = f"{wd['name']} / {n}" + (f" #{count[n]}" if count[n] > 1 else "")
-                if key not in D:
-                    unknown.append(f"{key} = {v!r} ({tab.strip()})")
-                elif _same(v, D[key]):
+            for cat, n, v in wd["settings"]:
+                hit = _lookup(F.get(wd["name"], []), cat, n)
+                where = f"{wd['name']} / {(cat + ' / ') if cat else ''}{n}"
+                if hit is None:
+                    unknown.append(f"{where} = {v!r} ({tab.strip()})")
+                elif _same(v, hit[2]):
                     ok += 1
                 else:
-                    bad.append(f"{key}: MEITE {v!r}, file {D[key]!r} ({tab.strip()})")
+                    bad.append(f"{where}: MEITE {v!r}, file {hit[2]!r} ({tab.strip()})")
     stem = re.split(r"[\\/]", path)[-1].rsplit(".", 1)[0]
     open_ok = stem in status
     print(f"open in MEITE: {'yes' if open_ok else 'NO'} (looking for {stem!r} in status bar {status})")
@@ -220,7 +257,9 @@ def main(argv):
         return 1
     w = window()
     status = loaded_name(w)
-    views = walk(w)
+    only = driver_tabs() if argv[1] == "check" else None
+    views = walk(w, only)
+    print(f"visited {len(views)} tabs: {', '.join(t.strip() for t in views)}")
     if argv[1] == "map":
         out = argv[2] if len(argv) > 2 else "docs/meite_layout.md"
         write_map(views, out, argv[3] if len(argv) > 3 else None)
