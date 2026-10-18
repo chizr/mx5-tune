@@ -4,3 +4,4 @@ scipy
 reportlab
 matplotlib
 pywinauto; sys_platform == "win32"
+bleak
