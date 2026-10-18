@@ -10,7 +10,8 @@ Start here in a new session, then read `CLAUDE.md` for the rules.
 - **Oil pressure protection: armed since 2026-10-17 17:50.** It had never been active (every file since v7 enables it, the ECU had it off). Set in MEITE while connected, burned and power-cycled; now `EPS Oil Press Status` = 1. **After every burn, run `tools/meite_check.py check` with MEITE connected:** a file burn may drop it again.
 - **Fuel:** tank is still the ~6-month-old 98 with an octane booster added. Plan: run it down off boost, fill with fresh 98, note the date.
 - **Purple wastegate spring fitted the evening of 2026-10-16** (~7 psi ≈ 150 kPa abs opening; flap and preload checked 2026-10-17). The 2026-10-17 drive already ran on it: part-throttle boost up 10–17 kPa vs green at 2,500–4,000 rpm (findings). It sets the minimum boost: 0% duty or a dead solenoid gives spring pressure. If it runs at ~12 psi (a guess, by analogy with green +5 psi), spring-only boost would be ~185 kPa, at the 185 kPa gear limit and just under the 190 kPa over-boost cut. Get the running pressure from Forge's sheet before boost; C2 (spring-only) on fresh fuel confirms it.
-- **Stay off boost** until fresh fuel is in and the BOV check and boost leak test are done. Knock control is firing on cyl 3 (and 2) at 2,500–3,600 rpm × 90–130 kPa; some of cyl 3's readings are noise (one event at 46 kPa / 2% TPS).
+- **Boost now works (2026-10-18): the BOV was the leak.** With the BOV deleted the car reached the boost table's targets for the first time (185 kPa at 4,500 rpm, 98% TPS; earlier drives topped out at 113–127 kPa). Every boost entry knocked on cyl 3 or 2 (old fuel). **Stay off boost** until: fresh fuel in, and a calibration with boost capped while knock is unresolved (proposed v17). BOV: replace or rebuild before refitting; until then the blanked port means compressor surge on lift.
+- Knock control fires on cyl 3 (and 2) at 2,000–3,600 rpm × 90–130 kPa; some of cyl 3's readings are noise (one event at 46 kPa / 2% TPS).
 - **Chris's to-do list (car, not calibration):** purple spring running pressure from Forge's sheet; BOV bench test, then reconnect its reference line (it is currently removed and capped, after the 2026-10-17 logs); fuel pressure leak-down pinch test; boost leak test; tyre size.
 - **Next calibration work, in order:** (1) check v16 drive logs: cruise trims within ±5%, knock events, idle, return to idle; (2) fill VE data gaps by normal driving (`docs/ve_coverage.png`); (3) dyno: spring-only boost (C2), duty steps (C3), boost VE and AFR targets, knock with det cans, then boost duty tables and PID; (4) return-to-idle dip; (5) gear detection.
 - **Waiting on Chris:** fuel date once refilled; what happened at ~10:46:17 on 2026-10-07 (knock event at 5,178 rpm in 1st); tyre size.
@@ -83,6 +84,16 @@ Versions are git tags; from v10 each version is also its own file `calibrations/
 Not changed yet: VE above 64 kPa and all boost VE, AFR targets other than 100/115 kPa, boost targets, boost duty tables, PID gains, knock thresholds and retard rate, fuel pressure protection, oil temperature protection.
 
 ## Findings so far
+
+### 2026-10-18: first v16 drive, BOV deleted (~20 min, old fuel)
+
+Log: `logs/2026-10-18_1121_meite-pc_drive-bov-deleted.csv`, with Comms Log frames captured live by `meite_comms` (knock watched in real time).
+
+- **The BOV was the boost leak.** BOV removed and the port blanked: boost reached 147, 144 and **185 kPa** (4,513 rpm, 98% TPS, low gear), against 113–127 kPa on every earlier drive on the hybrid, including the 2026-10-17 morning drive already on the purple spring with the BOV connected. So the BOV leaked or opened on boost even when referenced. Replace or rebuild it (bench-test: holds 10–15 psi with the reference open, opens on vacuum) before refitting.
+- **Boost control:** duty goes to the 80% max from 105 kPa; MAP rose 117 → 185 kPa in ~1 s; the PID then trimmed duty to ~74% as MAP passed the target (172–188 kPa at those points). Overshoot ~6–13 kPa past target; never reached the 190 kPa cut. Spool from ~3,500 rpm. The calibration asks for this much boost: the targets were set when the turbo couldn't reach them. With knock unresolved, cap them (proposed v17) until fresh fuel and det-can testing.
+- **Knock:** 6 retard onsets, each to −8°: cyl 3 at 2,463 rpm × 101 kPa (AFR 13.0), 2,989 × 108 (11.6), 2,208 × 94 (12.1), 2,752 × 118 (11.6); cyl 2 at 2,036 × 103 (12.5), 3,173 × 127 (12.3). Base timing 16.5–19.6° at those points; IAT 24–26 °C. All in the 2,000–3,200 rpm × 94–127 kPa band (the transition onto boost, including two at only ~21% TPS in a higher gear at ~2,000 rpm). AFR already rich, so not lean: fuel octane (old tank + booster) and timing. Peaks over threshold were small (380 vs 379) to clear (456 vs 393).
+- **Fuel at real demand:** injector duty peaked at 43% (185 kPa), and fuel held 300–315 kPa above MAP throughout; the single 190 kPa reading is a logging artefact (stale MAP sample on throttle lift). So at this demand the pump-side leak isn't costing flow; the bucket test is still the clean check for higher demand.
+- **Protections:** lean protection armed (status 4) on boost, AFR on target, no trip; oil pressure status 5 (armed), min 322 kPa above 3,000 rpm. Coolant max 96 °C, IAT max 31 °C.
 
 ### 2026-10-17 evening: crankcase breathing baseline
 
