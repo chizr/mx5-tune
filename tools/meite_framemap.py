@@ -59,7 +59,14 @@ def locate(df, ut, ft, F, key_map):
 
 
 def scan(F, P, y):
+    """Candidates that reproduce y in >= 97% of rows AND in >= 95% of the rows where y is
+    away from its most common value (otherwise a mostly-zero channel matches any mostly-zero
+    byte). Channels with fewer than 20 such rows are too sparse to locate."""
     L = F.shape[1]
+    vals, counts = np.unique(y, return_counts=True)
+    off_mode = y != vals[np.argmax(counts)]
+    if off_mode.sum() < 20:
+        return []
     hits = []
     for off in range(4, L - 2):
         for typ, (_, n) in TYPES.items():
@@ -69,9 +76,11 @@ def scan(F, P, y):
             if not np.all(np.isfinite(x)):
                 continue
             for scale in (1, 0.1, 0.01, 0.001):
-                frac = float(np.mean(np.abs(x * scale - y) <= 0.0051 + np.abs(y) * 1e-6))
-                if frac >= 0.97:
-                    hits.append({"offset": off, "type": typ, "scale": scale, "frac": round(frac, 3)})
+                ok = np.abs(x * scale - y) <= 0.0051 + np.abs(y) * 1e-6
+                frac, frac_var = float(np.mean(ok)), float(np.mean(ok[off_mode]))
+                if frac >= 0.97 and frac_var >= 0.95:
+                    hits.append({"offset": off, "type": typ, "scale": scale, "frac": round(frac, 3),
+                                 "frac_varying": round(frac_var, 3)})
                     break
     return hits
 
