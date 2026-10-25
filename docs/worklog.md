@@ -47,6 +47,12 @@ NB1 MX-5 10th Anniversary (6-speed, no VVT), RHD, ~200,000 km on the car. Built 
 
 Target: about 260–290 crank hp daily on 98 RON, inside stock-piston limits. The 19T runs out near 300 crank hp anyway.
 
+### Maintenance log
+
+| Date | Item | Detail |
+| --- | --- | --- |
+| 2026-10-25 | Headlight bulbs, both sides | 2× OSRAM 64193.TP Original H4 (halogen, 60/55 W). Low beams had failed on both old bulbs; the spares tried in their place had dead high-beam filaments. High beam indicator only lit once the low-beam filaments were intact again (it completes its circuit through them). High, low and flash-to-pass all working |
+
 ## Calibration change log
 
 Versions are git tags; from v10 each version is also its own file `calibrations/mx5_nb_me442_vN.mecal` (also exported for v7, the rollback, and v8; the others: `git show vN:calibrations/mx5_nb_me442.mecal`). `v1` is the original file (`18Jul_boost_pwm_limits.mecal`). All of v2–v7 were made offline on 2026-10-04 and are reproducible byte-for-byte with `tools/mecal.py`. Newest first.
