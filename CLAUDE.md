@@ -17,7 +17,7 @@ Chris's NB1 MX-5 10th Anniversary (6-speed; built 1.8 BP, **stock pistons**, for
 1. Make a new version with `tools/mecal.py`: `load` the previous `_vN` file, edit with `set_param` / `set_cells`, then `save` to the new `_vN+1` path. It replaces values as text and keeps every other byte, including CRLF line endings. Never re-serialise the XML or reformat the file.
 2. Before committing, run `python3 tools/mecal.py diff calibrations/mx5_nb_me442_vN.mecal calibrations/mx5_nb_me442_vN+1.mecal` and check that only the intended values changed. Report that diff to Chris.
 3. One logical change set per commit, tagged `vN`. Add rows to the change log table in `docs/worklog.md` in the same commit (tag, area, setting, before, after, why).
-4. Chris burns calibrations himself in MEITE after spot-checking. Never claim a version has been driven until he says so.
+4. Chris loads ("burns") calibrations himself in MEITE after spot-checking. Never claim a version has been driven until he says so. Note: any edit Chris makes in MEITE while connected goes straight to the ECU (there's no separate burn step, mostly), so after live tests the ECU only matches a version file if every changed value was put back; check rather than assume.
 5. Some driver settings repeat a name: `EPS: Oil` has two `Enabled` params (temperature, then pressure → `occurrence=1`).
 6. 2D tables are flat, row-major: index = row × cols + col. Rows are load (MAP kPa, `input_1`), columns are rpm (`input_0`).
 
