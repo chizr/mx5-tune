@@ -52,6 +52,7 @@ Target: about 260–290 crank hp daily on 98 RON, inside stock-piston limits. Th
 | Date | Item | Detail |
 | --- | --- | --- |
 | 2026-10-25 | Headlight bulbs, both sides | 2× OSRAM 64193.TP Original H4 (halogen, 60/55 W). Low beams had failed on both old bulbs; the spares tried in their place had dead high-beam filaments. High beam indicator only lit once the low-beam filaments were intact again (it completes its circuit through them). High, low and flash-to-pass all working |
+| 2026-10-26 | Throttle body shaft (inspection) | Little play; possibly very slight left/right movement. Idle data agrees there's no meaningful air leak: warm idle 998 rpm at 22% duty with MAP ~31.5 kPa, steady (2026-10-25). No action; re-check if idle duty needed for 1,000 rpm starts falling or idle hangs |
 
 ## Calibration change log
 
