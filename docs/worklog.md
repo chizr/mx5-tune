@@ -44,6 +44,7 @@ NB1 MX-5 10th Anniversary (6-speed, no VVT), RHD, ~200,000 km on the car. Built 
 | Idle | PWM idle valve, open loop. Primary fan adder +2%; power steering (extra load) switch on Dig In 1, +6%. Chris confirms the idle-up works, though it hasn't shown up in the logs so far |
 | Gearbox | 6-speed. Calibration ratios 3.76, 2.269, 1.646, 1.257, 1.000, 0.843; final drive 3.636 (not confirmed against the car) |
 | Chassis | BC Racing coilovers; Whiteline anti-roll bars; Brown-Davis roll bar (bolted in; makes fuel tank / pump access a big job); Enkei RPF1 15×7 wheels, Yokohama AD09 205/50 R15 (586 mm diameter, 1.84 m static circumference; ~1.81 m rolling from the logs); new front brakes waiting to be fitted |
+| Interior / seats | 2× Sparco Sprint V. Driver's: fixed mount. Passenger's: on the stock rails with Jass adapters |
 
 Target: about 260–290 crank hp daily on 98 RON, inside stock-piston limits. The 19T runs out near 300 crank hp anyway.
 
