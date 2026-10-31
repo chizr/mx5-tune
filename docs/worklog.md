@@ -52,7 +52,7 @@ Target: about 260–290 crank hp daily on 98 RON, inside stock-piston limits. Th
 
 | Date | Item | Detail |
 | --- | --- | --- |
-| After rebuild (date, km and oil to confirm) | Engine oil change | Running-in oil drained after a few hundred km (Chris) |
+| ~Apr 2026 (approx.; ~100–200 km ago at 2026-10-31) | Engine oil change | Running-in oil drained after a few hundred km (Chris). Oil grade to confirm |
 | 2026-10-25 | Headlight bulbs, both sides | 2× OSRAM 64193.TP Original H4 (halogen, 60/55 W). Low beams had failed on both old bulbs; the spares tried in their place had dead high-beam filaments. High beam indicator only lit once the low-beam filaments were intact again (it completes its circuit through them). High, low and flash-to-pass all working |
 | 2026-10-26 | Throttle body shaft (inspection) | Little play; possibly very slight left/right movement. Idle data agrees there's no meaningful air leak: warm idle 998 rpm at 22% duty with MAP ~31.5 kPa, steady (2026-10-25). No action; re-check if idle duty needed for 1,000 rpm starts falling or idle hangs |
 | 2026-10-26 | BOV | Changed to vent-to-atmosphere with a trumpet (was recirculating) and fitted a stiffer spring. Previously vented into the airbox (no intake-pipe port, nothing to cap). Check: clean venting, no flutter on lift |
