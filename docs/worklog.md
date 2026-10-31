@@ -109,7 +109,7 @@ Not changed yet: VE above 64 kPa and all boost VE, AFR targets other than 100/11
 
 ## Findings so far
 
-### 2026-10-31: first drive on v25 (street, ~26 min, warm evening, BOV vented with stiffer spring)
+### 2026-10-31: first drive on v25 (street, ~26 min, evening, BOV vented with stiffer spring)
 
 Live frames via `meite_comms` plus Dragy, side by side (raw frames not committed; PC log not yet found or added). AC button used for map 2 at ~11.5–14.5 and ~21 min.
 
@@ -117,8 +117,8 @@ Live frames via `meite_comms` plus Dragy, side by side (raw frames not committed
 - **VSS scale confirmed with GPS:** Dragy speed is km/h and tracks VSS (corr 0.9965); Dragy ÷ VSS = 1.583 against 1.609 for exact mph, so VSS reads ~1.6% high. `Pulses per distance` ~4,065 would make it exact (not needed).
 - **Boost:** map 1 max 140 kPa (4,580 rpm, 1.9 s burst, duty pegged at 40%); bursts were 1–2 s so the 160 kPa target was not reached. 100% TPS reached in several bursts. The vented BOV is holding at least this much: part-throttle 115–130 kPa from ~3,000 rpm.
 - **Map 2 is not spring-only:** map 2 above 105 kPa: duty 34 → 27% in 1.1 s, 24 → 21%, 33 → 28%; max 121 kPa. `Boost I Comp.` 0.6–0.9 is retained while inactive, so duty starts where the I term left off and unwinds slowly (P term ~0). `Boost Status` goes 1 at 105 kPa as usual.
-- **Knock:** 8 retard onsets (−8°) in 14 boost events, final timing down to 9.3–11.7° at 120–130 kPa; six events had no or minimal retard (e.g. 3,300–4,470 rpm × 121 kPa, 40% TPS, none). So not literally every entry now. Still unresolved: det cans.
-- **Fuelling and protections:** boost AFR 11.6–12.2 against ~12.2; fuel 293–315 kPa across the injectors (0.1–99.9%); injector duty max 31%; no warnings except knock. Coolant max 94 °C, IAT max 24 °C (cool evening), oil 99 °C; hot idle oil 131–166 kPa, the lowest (131) at 938 rpm with 96 °C oil. Hot idle dipped to 938–950 rpm at times.
+- **Knock:** 6 of the 14 boost events hit the full −8° (final timing down to 9.3–11.7° at 120–130 kPa); the other 8 had little or none (−1.5° at most; e.g. 3,300–4,470 rpm × 121 kPa, 40% TPS, none). So no longer every entry. Still unresolved: det cans.
+- **Fuelling and protections:** boost AFR 11.6–12.2 against ~12.2; fuel 293–315 kPa across the injectors (0.1–99.9%); injector duty max 31%; no warnings except knock. Coolant max 94 °C, IAT max 24 °C, oil 99 °C; hot idle oil 131–166 kPa, the lowest (131) at 938 rpm with 96 °C oil. Hot idle dipped to 938–950 rpm at times.
 - **VSS spikes:** 2.9/min of moving time (baseline before any filter or firmware change).
 
 ### 2026-10-25: driveway session on v24 (engine-off GPT tests, warm-up, idle injection angle sweep)
