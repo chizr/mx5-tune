@@ -111,7 +111,7 @@ Not changed yet: VE above 64 kPa and all boost VE, AFR targets other than 100/11
 
 ### 2026-10-31: first drive on v25 (street, ~26 min, evening, BOV vented with stiffer spring)
 
-Live frames via `meite_comms` plus Dragy, side by side (raw frames not committed; PC log not yet found or added). AC button used for map 2 at ~11.5–14.5 and ~21 min.
+Log: `logs/2026-10-31_1642_meite-pc_drive-v25-map-switch.csv`, with live frames via `meite_comms` and Dragy alongside (frames and Dragy file not committed). AC button used for map 2 at ~11.5–14.5 and ~21 min.
 
 - **Gear detection fixed:** `VSS Gear` matched rpm/mph in 5,332 of 5,332 samples across 1st–5th. 6th read 0 in the 11 samples seen (too few to judge). `VSS Calc. Speed` is ~1.3 × VSS, so the "Calc ≈ VSS" prediction in the v23 row was wrong; gear is what matters.
 - **VSS scale confirmed with GPS:** Dragy speed is km/h and tracks VSS (corr 0.9965); Dragy ÷ VSS = 1.583 against 1.609 for exact mph, so VSS reads ~1.6% high. `Pulses per distance` ~4,065 would make it exact (not needed).
@@ -120,6 +120,8 @@ Live frames via `meite_comms` plus Dragy, side by side (raw frames not committed
 - **Knock:** 6 of the 14 boost events hit the full −8° (final timing down to 9.3–11.7° at 120–130 kPa); the other 8 had little or none (−1.5° at most; e.g. 3,300–4,470 rpm × 121 kPa, 40% TPS, none). So no longer every entry. Still unresolved: det cans.
 - **Fuelling and protections:** boost AFR 11.6–12.2 against ~12.2; fuel 293–315 kPa across the injectors (0.1–99.9%); injector duty max 31%; no warnings except knock. Coolant max 94 °C, IAT max 24 °C, oil 99 °C; hot idle oil 131–166 kPa, the lowest (131) at 938 rpm with 96 °C oil. Hot idle dipped to 938–950 rpm at times.
 - **VSS spikes:** 2.9/min of moving time (baseline before any filter or firmware change).
+- **From the PC log:** `EPS Oil Press Status` and `EPS Oil Temp Status` 5 (armed) for the whole drive, so the file load kept both; lean protection armed for 12 samples, no trip. `Sel. Map Boost` 1 / 2 followed the button; ignition and fuel stayed on map 1; injection angle 300; no lost sync. Knock counts: cyl 3 ×18, cyl 2 ×10, cyl 1/4 none, 9 onsets at 2,920–4,300 rpm × 103–121 kPa. Knock readings again don't respond to timing: at 2,900–4,400 rpm × 108–135 kPa, raw median 364 / p90 490 with 6–8° retard (final 11.4°) against 380 / 468 with none (final 21.3°). Supports noise; det cans decide. Hot idle: 981 rpm at 22.0%, fan off, oil p5 138 kPa, **lambda trim −9%** (it was −2% to −4% in the 10-25 driveway idle), so hot-after-a-drive idle runs rich, near the −10% limit.
+- **BOV (Chris):** very loud when venting ("quite extreme"), not much compressor surge. So the stiffer spring is opening well enough; no preload change needed for function.
 
 ### 2026-10-25: driveway session on v24 (engine-off GPT tests, warm-up, idle injection angle sweep)
 
